@@ -1,4 +1,7 @@
-public final class dev/arunkumar/compass/Realm {
-	public fun <init> ()V
+public final class dev/arunkumar/compass/RealmKt {
+	public static final fun DefaultRealm ()Lio/realm/Realm;
+	public static final fun RealmFunction (Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun RealmQuery (Lkotlin/jvm/functions/Function1;)Lkotlin/jvm/functions/Function1;
+	public static final fun realm (Lkotlin/jvm/functions/Function1;)V
 }
 
