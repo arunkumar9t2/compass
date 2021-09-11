@@ -16,7 +16,7 @@
 
 package publish
 
-import ModuleVersions
+import COMPASS_RELEASE_VERSION
 import gradle.ConfigurablePlugin
 import io.github.gradlenexus.publishplugin.NexusPublishExtension
 import org.gradle.kotlin.dsl.apply
@@ -43,13 +43,9 @@ public class PublishingCommon : ConfigurablePlugin({
     }
   }
 
-  val versions = ModuleVersions
-
   allprojects {
     group = findProperty("groupId").toString()
-    if (versions[name] != null) {
-      version = if (hasProperty("snapshot")) "master-SNAPSHOT" else versions[name]!!.toString()
-    }
+    version = if (hasProperty("snapshot")) "main-SNAPSHOT" else COMPASS_RELEASE_VERSION
   }
 
   configure<NexusPublishExtension> {
