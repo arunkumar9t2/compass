@@ -50,11 +50,10 @@ public class BuildCommonPlugin : ConfigurablePlugin({
     error("build-common should be only applied to root project")
   }
 
+  configureApiValidation()
+
   subprojects {
-
     configureSpotless()
-
-    configureApiValidation()
   }
 })
 
