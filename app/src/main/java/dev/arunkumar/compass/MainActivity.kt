@@ -28,7 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import dev.arunkumar.compass.ui.theme.CompassTheme
 
-class MainActivity : ComponentActivity() {
+public class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContent {
@@ -45,13 +45,13 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
+public fun Greeting(name: String) {
   Text(text = "Hello $name!")
 }
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+public fun DefaultPreview() {
   CompassTheme {
     Greeting("Android")
   }
