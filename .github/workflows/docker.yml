@@ -1,0 +1,28 @@
+name: Docker Workflow
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/docker.yml'
+      - 'docker/**'
+      - 'gradle**'
+      - '**.gradle'
+      - '**.gradle.kts'
+      - 'build-logic/**/Constants.kt'
+
+jobs:
+  publish-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build docker image and publish
+        uses: elgohr/Publish-Docker-Github-Action@3.04
+        with:
+          name: ${{ github.repository }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ghcr.io
+          workdir: docker
+          dockerfile: Dockerfile
