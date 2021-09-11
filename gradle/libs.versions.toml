@@ -22,6 +22,8 @@ spotless = "com.diffplug.spotless:spotless-plugin-gradle:5.11.0"
 dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 nexus-publish = "io.github.gradle-nexus:publish-plugin:1.1.0"
 
+realm = "io.realm:realm-gradle-plugin:10.8.0"
+
 # Tests
 junit = "junit:junit:4.+"
 androidx-junit = "androidx.test.ext:junit:1.1.3"

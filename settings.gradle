@@ -54,3 +54,4 @@ if (isCiServer) {
 
 rootProject.name = "compass"
 include ":app"
+include ":compass"

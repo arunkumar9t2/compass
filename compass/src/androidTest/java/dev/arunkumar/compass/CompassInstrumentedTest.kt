@@ -14,28 +14,19 @@
  * limitations under the License.
  */
 
-plugins {
-  id "android-binary-plugin"
-}
+package dev.arunkumar.compass
 
-android {
-  buildFeatures {
-    compose true
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
+import org.junit.Assert.assertEquals
+import org.junit.Test
+import org.junit.runner.RunWith
+
+@RunWith(AndroidJUnit4::class)
+class CompassInstrumentedTest {
+  @Test
+  fun useAppContext() {
+    val appContext = InstrumentationRegistry.getInstrumentation().targetContext
+    assertEquals("dev.arunkumar.compass.test", appContext.packageName)
   }
-}
-
-dependencies {
-  implementation(deps.androidx.core)
-  implementation(deps.androidx.lifecycle)
-  implementation(deps.androidx.activity.compose)
-
-  implementation(deps.compose.material)
-  implementation(deps.compose.ui.ui)
-  implementation(deps.compose.ui.toolingpreview)
-  debugImplementation(deps.compose.ui.tooling)
-
-  testImplementation(deps.junit)
-  androidTestImplementation(deps.androidx.junit)
-  androidTestImplementation(deps.androidx.espresso)
-  androidTestImplementation(deps.compose.ui.test)
 }

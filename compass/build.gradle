@@ -15,27 +15,11 @@
  */
 
 plugins {
-  id "android-binary-plugin"
-}
-
-android {
-  buildFeatures {
-    compose true
-  }
+  id "android-library-plugin"
 }
 
 dependencies {
-  implementation(deps.androidx.core)
-  implementation(deps.androidx.lifecycle)
-  implementation(deps.androidx.activity.compose)
-
-  implementation(deps.compose.material)
-  implementation(deps.compose.ui.ui)
-  implementation(deps.compose.ui.toolingpreview)
-  debugImplementation(deps.compose.ui.tooling)
-
   testImplementation(deps.junit)
   androidTestImplementation(deps.androidx.junit)
   androidTestImplementation(deps.androidx.espresso)
-  androidTestImplementation(deps.compose.ui.test)
 }
