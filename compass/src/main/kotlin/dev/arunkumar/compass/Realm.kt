@@ -14,4 +14,39 @@
  * limitations under the License.
  */
 
+@file:Suppress("NOTHING_TO_INLINE")
+
 package dev.arunkumar.compass
+
+import io.realm.Realm
+import io.realm.RealmList
+import io.realm.RealmModel
+import io.realm.RealmQuery
+
+public typealias RealmBlock = (Realm) -> Unit
+public typealias RealmFunction<T> = (Realm) -> T
+public typealias RealmQueryBuilder<T> = Realm.() -> RealmQuery<T>
+
+@Suppress("FunctionName")
+public inline fun DefaultRealm(): Realm = Realm.getDefaultInstance()
+
+public inline fun realm(action: RealmBlock) {
+  val realm = DefaultRealm()
+  action(realm)
+  realm.close()
+}
+
+@Suppress("FunctionName")
+public inline fun <T> RealmFunction(block: RealmFunction<T>): T {
+  val realm = DefaultRealm()
+  return block(realm).also { realm.close() }
+}
+
+@Suppress("FunctionName")
+public fun <T : RealmModel> RealmQuery(
+  builder: RealmQueryBuilder<T>
+): RealmQueryBuilder<T> = builder
+
+public inline fun <reified T : RealmModel> Collection<T>.toRealmList(): RealmList<T> {
+  return RealmList(*toTypedArray())
+}
