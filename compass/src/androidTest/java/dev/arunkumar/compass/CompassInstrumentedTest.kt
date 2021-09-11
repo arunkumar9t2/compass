@@ -23,9 +23,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class CompassInstrumentedTest {
+public class CompassInstrumentedTest {
   @Test
-  fun useAppContext() {
+  public fun useAppContext() {
     val appContext = InstrumentationRegistry.getInstrumentation().targetContext
     assertEquals("dev.arunkumar.compass.test", appContext.packageName)
   }

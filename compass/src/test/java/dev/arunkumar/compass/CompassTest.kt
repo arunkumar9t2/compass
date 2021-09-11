@@ -19,9 +19,9 @@ package dev.arunkumar.compass
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class CompassTest {
+public class CompassTest {
   @Test
-  fun addition_isCorrect() {
+  public fun addition_isCorrect() {
     assertEquals(4, 2 + 2)
   }
 }
