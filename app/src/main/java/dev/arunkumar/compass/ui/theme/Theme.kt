@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.arunkumar.relic.ui.theme
+package dev.arunkumar.compass.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
@@ -44,7 +44,7 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
-fun RelicTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+fun CompassTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
   val colors = if (darkTheme) {
     DarkColorPalette
   } else {

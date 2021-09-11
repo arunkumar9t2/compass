@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.arunkumar.relic
+package dev.arunkumar.compass
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -33,6 +33,6 @@ class ExampleInstrumentedTest {
   fun useAppContext() {
     // Context of the app under test.
     val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-    assertEquals("dev.arunkumar.relic", appContext.packageName)
+    assertEquals("dev.arunkumar.compass", appContext.packageName)
   }
 }

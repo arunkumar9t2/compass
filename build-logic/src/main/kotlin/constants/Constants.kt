@@ -29,14 +29,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// TODO - Update Android compile, min and target SDK versionss
 public const val ANDROID_COMPILE_SDK: Int = 30
-public const val ANDROID_MIN_SDK: Int = 25
+public const val ANDROID_MIN_SDK: Int = 21
 public const val ANDROID_TARGET_SDK: Int = 30
 
-// TODO - Update Android package name
-public const val ANDROID_PACKAGE_NAME: String = "dev.arunkumar.relic"
+public const val ANDROID_PACKAGE_NAME: String = "dev.arunkumar.compass"
 public const val ANDROID_RELEASE_VARIANT: String = "release"
 public const val ANDROID_DEBUG_VARIANT: String = "debug"
 public const val ANDROID_VERSION_CODE: Int = 1
 public const val ANDROID_VERSION_NAME: String = "1.0"
+
+public typealias ModuleVersion = Map<String, String>
+
+@OptIn(ExperimentalStdlibApi::class)
+public val ModuleVersions: ModuleVersion = buildMap {
+  // Key - gradle module name
+  // Value - publishing version name
+  put("compass", "0.1.0")
+}
+

@@ -16,6 +16,7 @@
 
 package publish
 
+import ModuleVersions
 import gradle.ConfigurablePlugin
 import io.github.gradlenexus.publishplugin.NexusPublishExtension
 import org.gradle.kotlin.dsl.apply
@@ -42,8 +43,7 @@ public class PublishingCommon : ConfigurablePlugin({
     }
   }
 
-  // TODO Configure module specific versioning if desired
-  val versions = (rootProject.extra["moduleVersions"] as Map<String, String>)
+  val versions = ModuleVersions
 
   allprojects {
     group = findProperty("groupId").toString()

@@ -21,6 +21,7 @@ import com.diffplug.gradle.spotless.SpotlessPlugin
 import gradle.ConfigurablePlugin
 import gradle.deps
 import gradle.version
+import kotlinx.validation.ApiValidationExtension
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.configure
@@ -59,10 +60,10 @@ public class BuildCommonPlugin : ConfigurablePlugin({
 
 private fun Project.configureApiValidation() {
   // Configure API checks
-  // TODO Verify if binary validator is needed
-  //apply(plugin = "org.jetbrains.kotlinx.binary-compatibility-validator")
-  //configure<ApiValidationExtension> {
-  //}
+  apply(plugin = "org.jetbrains.kotlinx.binary-compatibility-validator")
+  configure<ApiValidationExtension> {
+    ignoredProjects.add("app")
+  }
 }
 
 /**

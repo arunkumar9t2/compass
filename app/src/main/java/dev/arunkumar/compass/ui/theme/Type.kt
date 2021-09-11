@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.arunkumar.relic.ui.theme
+package dev.arunkumar.compass.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

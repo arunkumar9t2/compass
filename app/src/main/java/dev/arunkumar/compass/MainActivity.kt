@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.arunkumar.relic
+package dev.arunkumar.compass
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -26,13 +26,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import dev.arunkumar.relic.ui.theme.RelicTheme
+import dev.arunkumar.compass.ui.theme.CompassTheme
 
 class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContent {
-      RelicTheme {
+      CompassTheme {
         Surface(
           modifier = Modifier.fillMaxSize(),
           color = MaterialTheme.colors.background
@@ -52,7 +52,7 @@ fun Greeting(name: String) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-  RelicTheme {
+  CompassTheme {
     Greeting("Android")
   }
 }

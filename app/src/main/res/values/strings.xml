@@ -16,5 +16,5 @@
 
 <resources>
     <!--TODO Change app name-->
-    <string name="app_name">relic</string>
+    <string name="app_name">Compass</string>
 </resources>

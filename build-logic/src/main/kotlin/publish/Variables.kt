@@ -16,14 +16,12 @@
 
 package publish
 
-// TODO Ensure local.properties is present with the following variables for maven publishing
 internal const val OSSRH_USERNAME = "OSSRH_USERNAME"
 internal const val OSSRH_PASSWORD = "OSSRH_PASSWORD"
 internal const val SONATYPE_STAGING_PROFILE_ID = "SONATYPE_STAGING_PROFILE_ID"
 internal const val SIGNING_KEY_ID = "SIGNING_KEY_ID"
 internal const val SIGNING_KEY = "SIGNING_KEY"
 internal const val SIGNING_PASSWORD = "SIGNING_PASSWORD"
-
 
 internal val PublishVariables = listOf(
   OSSRH_USERNAME,

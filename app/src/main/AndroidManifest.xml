@@ -15,20 +15,20 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="dev.arunkumar.relic">
-    <!--TODO Change app package name, icon and theme-->
+    package="dev.arunkumar.compass">
+
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Relic">
+        android:theme="@style/Theme.Compass">
         <activity
-            android:name=".MainActivity"
+            android:name="dev.arunkumar.compass.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Relic">
+            android:theme="@style/Theme.Compass">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

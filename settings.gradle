@@ -52,5 +52,5 @@ if (isCiServer) {
   }
 }
 
-rootProject.name = "relic"
+rootProject.name = "compass"
 include ":app"
