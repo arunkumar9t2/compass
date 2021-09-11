@@ -79,6 +79,7 @@ internal fun Project.androidCommon() {
         "-Xopt-in=kotlin.RequiresOptIn",
         "-Xopt-in=kotlin.experimental.ExperimentalTypeInference",
         "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+        "-Xexplicit-api=strict"
       )
     }
   }

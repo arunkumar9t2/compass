@@ -24,7 +24,7 @@ jobs:
           gradle-dependencies-cache-key: |
             gradle/libs.versions.toml
             build-logic/**/Constants.kt
-          arguments: app:lintDebug spotlessCheck
+          arguments: app:lintDebug spotlessCheck apiCheck
   build:
     runs-on: ubuntu-latest
     container:

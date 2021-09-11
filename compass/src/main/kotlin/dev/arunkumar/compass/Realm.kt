@@ -14,14 +14,4 @@
  * limitations under the License.
  */
 
-plugins {
-  id "android-library-plugin"
-  id "org.jetbrains.kotlin.kapt"
-}
-apply plugin: "realm-android"
-
-dependencies {
-  testImplementation(deps.junit)
-  androidTestImplementation(deps.androidx.junit)
-  androidTestImplementation(deps.androidx.espresso)
-}
+package dev.arunkumar.compass
