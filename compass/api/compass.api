@@ -5,3 +5,22 @@ public final class dev/arunkumar/compass/RealmKt {
 	public static final fun realm (Lkotlin/jvm/functions/Function1;)V
 }
 
+public abstract interface class dev/arunkumar/compass/thread/CloseableExecutor : java/lang/AutoCloseable, java/util/concurrent/Executor {
+}
+
+public final class dev/arunkumar/compass/thread/HandlerExecutor : dev/arunkumar/compass/thread/CloseableExecutor {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun close ()V
+	public fun execute (Ljava/lang/Runnable;)V
+}
+
+public final class dev/arunkumar/compass/thread/RealmExecutor : dev/arunkumar/compass/thread/CloseableExecutor {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun close ()V
+	public fun execute (Ljava/lang/Runnable;)V
+}
+
