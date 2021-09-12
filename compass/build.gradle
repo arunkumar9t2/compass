@@ -21,7 +21,13 @@ plugins {
 apply plugin: "realm-android"
 
 dependencies {
+  implementation deps.kotlinx.coroutines.android
+
   testImplementation(deps.junit)
+  testImplementation(deps.kotlin.test)
+  testImplementation(deps.kotlinx.coroutines.test)
+  androidTestImplementation(deps.kotlin.test)
   androidTestImplementation(deps.androidx.junit)
   androidTestImplementation(deps.androidx.espresso)
+  androidTestImplementation(deps.kotlinx.coroutines.test)
 }

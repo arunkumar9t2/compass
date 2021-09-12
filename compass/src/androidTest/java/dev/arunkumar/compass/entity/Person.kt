@@ -14,19 +14,12 @@
  * limitations under the License.
  */
 
-package dev.arunkumar.compass
+package dev.arunkumar.compass.entity
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
-import org.junit.Assert.assertEquals
-import org.junit.Test
-import org.junit.runner.RunWith
+import io.realm.RealmObject
+import java.util.*
 
-@RunWith(AndroidJUnit4::class)
-public class CompassInstrumentedTest {
-  @Test
-  public fun useAppContext() {
-    val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-    assertEquals("dev.arunkumar.compass.test", appContext.packageName)
-  }
-}
+public open class Person(
+  public var id: UUID = UUID.randomUUID(),
+  public var name: String = id.toString().substring(0, 6)
+) : RealmObject()

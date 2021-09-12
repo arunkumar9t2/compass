@@ -36,7 +36,7 @@ public interface CloseableExecutor : Executor, AutoCloseable
  * execute tasks with low priority.
  *
  * Notes: The [HandlerExecutor]'s internal [HandlerThread] event loop is stopped when [close] is called.
- *        As a good practice, always [close] the executor when it is no longer required.
+ *        As a good practice, always `close` the executor when it is no longer required.
  *
  * @param tag The thread name of the handler thread that will be created.
  */

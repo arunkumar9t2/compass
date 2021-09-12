@@ -69,6 +69,10 @@ internal fun Project.androidCommon() {
         "META-INF/licenses/**"
       )
     }
+
+    testOptions {
+
+    }
   }
 
   tasks.withType<KotlinCompile>().configureEach {

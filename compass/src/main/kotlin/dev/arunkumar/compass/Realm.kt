@@ -23,8 +23,9 @@ import io.realm.RealmList
 import io.realm.RealmModel
 import io.realm.RealmQuery
 
-public typealias RealmBlock = (Realm) -> Unit
-public typealias RealmFunction<T> = (Realm) -> T
+public typealias RealmBlock = (realm: Realm) -> Unit
+public typealias RealmFunction<T> = (realm: Realm) -> T
+public typealias RealmReceiver = Realm.() -> Unit
 public typealias RealmQueryBuilder<T> = Realm.() -> RealmQuery<T>
 
 @Suppress("FunctionName")
@@ -37,9 +38,20 @@ public inline fun realm(action: RealmBlock) {
 }
 
 @Suppress("FunctionName")
-public inline fun <T> RealmFunction(block: RealmFunction<T>): T {
+public inline fun <T : RealmModel> RealmFunction(block: RealmFunction<T>): T {
   val realm = DefaultRealm()
   return block(realm).also { realm.close() }
+}
+
+@Suppress("FunctionName")
+public inline fun RealmTransaction(noinline action: RealmBlock) {
+  val realm = DefaultRealm()
+  realm.executeTransaction(action)
+  realm.close()
+}
+
+public inline fun Realm.transact(crossinline block: RealmReceiver) {
+  executeTransaction { it.block() }
 }
 
 @Suppress("FunctionName")
