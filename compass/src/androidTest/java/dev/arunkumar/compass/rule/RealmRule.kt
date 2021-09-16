@@ -22,28 +22,38 @@ import dev.arunkumar.compass.entity.Person
 import dev.arunkumar.compass.transact
 import io.realm.Realm
 import io.realm.RealmConfiguration
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import org.junit.rules.ExternalResource
 
-public class RealmRule : ExternalResource() {
+public class RealmRule(
+  private val dispatcherProvider: () -> CoroutineDispatcher = { Dispatchers.IO }
+) : ExternalResource() {
+
+  private val dispatcher get() = dispatcherProvider()
   public lateinit var realm: Realm
 
-  override fun before() {
-    super.before()
-    Realm.init(ApplicationProvider.getApplicationContext())
-    val realmConfiguration = RealmConfiguration.Builder()
-      .deleteRealmIfMigrationNeeded()
-      .allowQueriesOnUiThread(false)
-      .allowWritesOnUiThread(false)
-      .initialData { realm ->
-        realm.insertOrUpdate((1..30).map { Person() })
-      }.build()
-    Realm.setDefaultConfiguration(realmConfiguration)
-    realm = DefaultRealm()
+  override fun before(): Unit = runBlocking {
+    withContext(dispatcher) {
+      Realm.init(ApplicationProvider.getApplicationContext())
+      val realmConfiguration = RealmConfiguration.Builder()
+        .deleteRealmIfMigrationNeeded()
+        .allowQueriesOnUiThread(false)
+        .allowWritesOnUiThread(false)
+        .initialData { realm ->
+          realm.insertOrUpdate((1..30).map { Person() })
+        }.build()
+      Realm.setDefaultConfiguration(realmConfiguration)
+      realm = DefaultRealm()
+    }
   }
 
-  override fun after() {
-    super.after()
-    realm.transact { deleteAll() }
-    realm.close()
+  override fun after(): Unit = runBlocking {
+    withContext(dispatcher) {
+      realm.transact { deleteAll() }
+      realm.close()
+    }
   }
 }

@@ -31,18 +31,15 @@ public class RealmExtensionTest {
   @get:Rule
   public val reamRule: RealmRule = RealmRule()
 
-  private val realm get() = reamRule.realm
-
   @Test
   public fun assertToRealmListReturnsUnManagedRealmTest() {
     val persons = (0..3).map { Person() }.toRealmList()
-    assert(!persons.isManaged) { }
     assertFalse("toRealmList returns non managed instances") { persons.isManaged }
   }
 
   @Test
   public fun assertTransactExtensionPerformsTransactionAndReturns() {
-    realm.transact {
+    RealmTransaction {
       val person = Person()
       copyToRealm(person)
       val results = where<Person>().equalTo("id", person.id).findAll()
