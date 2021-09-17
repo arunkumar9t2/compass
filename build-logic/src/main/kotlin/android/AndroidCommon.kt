@@ -44,6 +44,10 @@ internal fun Project.androidCommon() {
       targetSdk = ANDROID_TARGET_SDK
 
       testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+      testInstrumentationRunnerArguments += mapOf(
+        "clearPackageData" to "true"
+      )
+
       vectorDrawables {
         useSupportLibrary = true
       }
@@ -71,7 +75,7 @@ internal fun Project.androidCommon() {
     }
 
     testOptions {
-
+      execution = "ANDROIDX_TEST_ORCHESTRATOR"
     }
   }
 

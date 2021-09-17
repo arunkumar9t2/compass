@@ -32,4 +32,7 @@ realm = "io.realm:realm-gradle-plugin:10.8.0"
 junit = "junit:junit:4.+"
 androidx-junit = "androidx.test.ext:junit:1.1.3"
 androidx-espresso = "androidx.test.espresso:espresso-core:3.4.0"
+androidx-test-runner = "androidx.test:runner:1.4.0"
+androidx-test-orchestrator = "androidx.test:orchestrator:1.4.0"
 compose-ui-test = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
+

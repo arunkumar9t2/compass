@@ -21,8 +21,6 @@ import dev.arunkumar.compass.entity.Person
 import dev.arunkumar.compass.rule.RealmDispatcherRule
 import dev.arunkumar.compass.rule.RealmRule
 import dev.arunkumar.compass.thread.RealmDispatcher
-import io.realm.RealmChangeListener
-import io.realm.RealmResults
 import io.realm.kotlin.where
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -31,13 +29,10 @@ import org.junit.Test
 import org.junit.rules.RuleChain
 import org.junit.rules.TestRule
 import org.junit.runner.RunWith
-import java.util.concurrent.CountDownLatch
-import java.util.concurrent.TimeUnit
 import kotlin.test.assertTrue
 
 @RunWith(AndroidJUnit4::class)
-public class RealmDispatcherTest {
-
+public class RealmQueryTest {
   private val realmDispatcherRule: RealmDispatcherRule = RealmDispatcherRule()
   private val realmDispatcher: RealmDispatcher get() = realmDispatcherRule.dispatcher
   private val realmRule: RealmRule = RealmRule { realmDispatcher }
@@ -48,24 +43,13 @@ public class RealmDispatcherTest {
     .around(realmRule)
 
   @Test
-  public fun assertChangeListenerAddedOnRealmDispatcherWorks(): Unit = runBlocking {
+  public fun assertGetAllReturnsLoadedResults(): Unit = runBlocking {
     withContext(realmDispatcher) {
-      Realm { realm ->
-        val persons = realm.where<Person>().findAll()
-        val latch = CountDownLatch(1)
-        val realmChangeListener = RealmChangeListener<RealmResults<Person>> {
-          assertTrue("Change listener called successfully when using RealmDispatcher") { true }
-          latch.countDown()
-        }
-        persons.addChangeListener(realmChangeListener)
-
-        // Make a transaction
-        realm.transact {
-          copyToRealm(Person())
-        }
-
-        // Wait till change listener triggered
-        latch.await(500, TimeUnit.MILLISECONDS)
+      val persons = RealmQuery { where<Person>() }.getAll()
+      assertTrue("Assert getAll returns loaded results") { persons.size == 30 }
+      assertTrue("getAll returns with values populated") {
+        val person = persons.first()
+        person.name.isNotEmpty() && person.id.toString().isNotEmpty()
       }
     }
   }
