@@ -33,7 +33,7 @@ public class RealmRule(
 ) : ExternalResource() {
 
   private val dispatcher get() = dispatcherProvider()
-  public lateinit var realm: Realm
+  private lateinit var realm: Realm
 
   override fun before(): Unit = runBlocking {
     withContext(dispatcher) {
