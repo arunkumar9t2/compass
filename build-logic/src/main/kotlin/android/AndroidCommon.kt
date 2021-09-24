@@ -85,6 +85,7 @@ internal fun Project.androidCommon() {
       freeCompilerArgs += listOf(
         "-Xopt-in=kotlin.ExperimentalStdlibApi",
         "-Xopt-in=kotlin.RequiresOptIn",
+        "-Xopt-in=kotlin.time.ExperimentalTime",
         "-Xopt-in=kotlin.experimental.ExperimentalTypeInference",
         "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
         "-Xexplicit-api=strict"

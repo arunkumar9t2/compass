@@ -26,10 +26,12 @@ dependencies {
   testImplementation(deps.junit)
   testImplementation(deps.kotlin.test)
   testImplementation(deps.kotlinx.coroutines.test)
+  testImplementation(deps.turbine)
   androidTestImplementation(deps.kotlin.test)
   androidTestImplementation(deps.androidx.junit)
   androidTestImplementation(deps.androidx.espresso)
   androidTestImplementation(deps.kotlinx.coroutines.test)
+  androidTestImplementation(deps.turbine)
   androidTestImplementation(deps.androidx.test.runner)
   androidTestUtil(deps.androidx.test.orchestrator)
 }
