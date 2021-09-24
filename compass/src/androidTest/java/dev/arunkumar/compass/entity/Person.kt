@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 
-package dev.arunkumar.compass
+package dev.arunkumar.compass.entity
 
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import io.realm.RealmObject
+import java.util.*
 
-public class CompassTest {
-  @Test
-  public fun addition_isCorrect() {
-    assertEquals(4, 2 + 2)
-  }
-}
+public open class Person(
+  public var id: UUID = UUID.randomUUID(),
+  public var name: String = id.toString().substring(0, 6)
+) : RealmObject()

@@ -44,6 +44,10 @@ internal fun Project.androidCommon() {
       targetSdk = ANDROID_TARGET_SDK
 
       testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+      testInstrumentationRunnerArguments += mapOf(
+        "clearPackageData" to "true"
+      )
+
       vectorDrawables {
         useSupportLibrary = true
       }
@@ -69,6 +73,10 @@ internal fun Project.androidCommon() {
         "META-INF/licenses/**"
       )
     }
+
+    testOptions {
+      execution = "ANDROIDX_TEST_ORCHESTRATOR"
+    }
   }
 
   tasks.withType<KotlinCompile>().configureEach {
@@ -77,6 +85,7 @@ internal fun Project.androidCommon() {
       freeCompilerArgs += listOf(
         "-Xopt-in=kotlin.ExperimentalStdlibApi",
         "-Xopt-in=kotlin.RequiresOptIn",
+        "-Xopt-in=kotlin.time.ExperimentalTime",
         "-Xopt-in=kotlin.experimental.ExperimentalTypeInference",
         "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
         "-Xexplicit-api=strict"

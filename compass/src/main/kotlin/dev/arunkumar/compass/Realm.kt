@@ -21,18 +21,25 @@ package dev.arunkumar.compass
 import io.realm.Realm
 import io.realm.RealmList
 import io.realm.RealmModel
-import io.realm.RealmQuery
 
-public typealias RealmBlock = (Realm) -> Unit
-public typealias RealmFunction<T> = (Realm) -> T
-public typealias RealmQueryBuilder<T> = Realm.() -> RealmQuery<T>
+public typealias RealmBlock = (realm: Realm) -> Unit
+public typealias RealmFunction<T> = (realm: Realm) -> T
+public typealias RealmReceiver = Realm.() -> Unit
 
 @Suppress("FunctionName")
 public inline fun DefaultRealm(): Realm = Realm.getDefaultInstance()
 
-public inline fun realm(action: RealmBlock) {
+@Suppress("FunctionName")
+public inline fun Realm(block: RealmBlock) {
   val realm = DefaultRealm()
-  action(realm)
+  block(realm)
+  realm.close()
+}
+
+@Suppress("FunctionName")
+public inline fun RealmTransaction(noinline block: RealmReceiver) {
+  val realm = DefaultRealm()
+  realm.executeTransaction(block)
   realm.close()
 }
 
@@ -42,10 +49,9 @@ public inline fun <T> RealmFunction(block: RealmFunction<T>): T {
   return block(realm).also { realm.close() }
 }
 
-@Suppress("FunctionName")
-public fun <T : RealmModel> RealmQuery(
-  builder: RealmQueryBuilder<T>
-): RealmQueryBuilder<T> = builder
+public inline fun Realm.transact(crossinline block: RealmReceiver) {
+  executeTransaction { it.block() }
+}
 
 public inline fun <reified T : RealmModel> Collection<T>.toRealmList(): RealmList<T> {
   return RealmList(*toTypedArray())
