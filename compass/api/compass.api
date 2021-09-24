@@ -1,8 +1,26 @@
+public final class dev/arunkumar/compass/RealmFlowKt {
+	public static final fun asFlow (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun asFlow (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/flow/Flow;
+	public static synthetic fun asFlow$default (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;ILjava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
+	public static synthetic fun asFlow$default (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
+}
+
 public final class dev/arunkumar/compass/RealmKt {
 	public static final fun DefaultRealm ()Lio/realm/Realm;
+	public static final fun Realm (Lkotlin/jvm/functions/Function1;)V
 	public static final fun RealmFunction (Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static final fun RealmTransaction (Lkotlin/jvm/functions/Function1;)V
+	public static final fun transact (Lio/realm/Realm;Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class dev/arunkumar/compass/RealmKt$sam$i$io_realm_Realm_Transaction$0 : io/realm/Realm$Transaction {
+	public fun <init> (Lkotlin/jvm/functions/Function1;)V
+	public final synthetic fun execute (Lio/realm/Realm;)V
+}
+
+public final class dev/arunkumar/compass/RealmQueryKt {
 	public static final fun RealmQuery (Lkotlin/jvm/functions/Function1;)Lkotlin/jvm/functions/Function1;
-	public static final fun realm (Lkotlin/jvm/functions/Function1;)V
+	public static final fun getAll (Lkotlin/jvm/functions/Function1;)Ljava/util/List;
 }
 
 public abstract interface class dev/arunkumar/compass/thread/CloseableExecutor : java/lang/AutoCloseable, java/util/concurrent/Executor {
@@ -14,6 +32,15 @@ public final class dev/arunkumar/compass/thread/HandlerExecutor : dev/arunkumar/
 	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun close ()V
 	public fun execute (Ljava/lang/Runnable;)V
+}
+
+public final class dev/arunkumar/compass/thread/RealmDispatcher : kotlinx/coroutines/CoroutineDispatcher, java/lang/AutoCloseable {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun close ()V
+	public fun dispatch (Lkotlin/coroutines/CoroutineContext;Ljava/lang/Runnable;)V
+	public fun isDispatchNeeded (Lkotlin/coroutines/CoroutineContext;)Z
 }
 
 public final class dev/arunkumar/compass/thread/RealmExecutor : dev/arunkumar/compass/thread/CloseableExecutor {
