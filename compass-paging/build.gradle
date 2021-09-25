@@ -23,6 +23,9 @@ apply plugin: "realm-android"
 
 dependencies {
   implementation deps.kotlinx.coroutines.android
+  api deps.androidx.paging
+
+  implementation project(path: ":compass")
 
   testImplementation(deps.junit)
   testImplementation(deps.kotlin.test)
