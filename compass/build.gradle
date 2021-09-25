@@ -17,6 +17,7 @@
 plugins {
   id "android-library-plugin"
   id "org.jetbrains.kotlin.kapt"
+  id "publish"
 }
 apply plugin: "realm-android"
 
