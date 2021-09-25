@@ -49,7 +49,7 @@ public fun <T : RealmModel, R> RealmQueryBuilder<T>.asFlow(
   }.flatMapConcat { realmDispatcher: RealmDispatcher ->
     callbackFlow {
       val realm = DefaultRealm()
-      val realmQuery = this@asFlow(realm)
+      val realmQuery = buildQuery(realm)
       val results = realmQuery.findAll()
 
       if (!results.isValid) {

@@ -23,7 +23,7 @@ import io.realm.RealmQuery
 
 public typealias RealmQueryBuilder<T> = Realm.() -> RealmQuery<T>
 
-private inline fun <T : RealmModel> RealmQueryBuilder<T>.buildQuery(realm: Realm): RealmQuery<T> {
+internal inline fun <T : RealmModel> RealmQueryBuilder<T>.buildQuery(realm: Realm): RealmQuery<T> {
   return invoke(realm)
 }
 
