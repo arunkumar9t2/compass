@@ -51,7 +51,7 @@ public class RealmDataSourceTest {
   @Before
   public fun setup() {
     val realmQueryBuilder = RealmQuery { where<Person>() }
-    val factory = RealmTiledDataSource.Factory(realmQueryBuilder)
+    val factory = RealmTiledDataSource.NoOpTransformFactory(realmQueryBuilder)
     pagingSource = factory.asPagingSourceFactory(realmDispatcher).invoke()
   }
 

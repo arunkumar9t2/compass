@@ -19,6 +19,8 @@ package dev.arunkumar.compass.paging
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import dev.arunkumar.compass.RealmCopyTransform
+import dev.arunkumar.compass.RealmModelTransform
 import dev.arunkumar.compass.RealmQueryBuilder
 import dev.arunkumar.compass.thread.RealmDispatcher
 import io.realm.RealmModel
@@ -36,17 +38,36 @@ public fun <T : RealmModel> RealmQueryBuilder<T>.asPagingItems(
     enablePlaceholders = false,
   )
 ): Flow<PagingData<T>> {
+  return asPagingItems(
+    tag = tag,
+    pagingConfig = pagingConfig,
+    realmModelTransform = RealmCopyTransform()
+  )
+}
+
+public fun <T : RealmModel, R : Any> RealmQueryBuilder<T>.asPagingItems(
+  tag: String = "PagingItemsExecutor",
+  pagingConfig: PagingConfig = PagingConfig(
+    pageSize = 20,
+    prefetchDistance = 20 * 3,
+    initialLoadSize = 20 * 3,
+    enablePlaceholders = false,
+  ),
+  realmModelTransform: RealmModelTransform<T, R>
+): Flow<PagingData<R>> {
   val realmQueryBuilder = this
   return flow {
     emit(RealmDispatcher(tag))
   }.flatMapConcat { dispatcher ->
-    val factory = RealmTiledDataSource.Factory(realmQueryBuilder)
+    val factory = RealmTiledDataSource.Factory(
+      realmQueryBuilder,
+      realmModelTransform
+    )
     val pagingSourceFactory = factory.asPagingSourceFactory(dispatcher)
     Pager(
       config = pagingConfig,
       initialKey = 0,
       pagingSourceFactory = pagingSourceFactory
-    ).flow
-      .onCompletion { dispatcher.close() }
+    ).flow.onCompletion { dispatcher.close() }
   }
 }

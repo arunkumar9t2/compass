@@ -1,6 +1,8 @@
 public final class dev/arunkumar/compass/paging/RealmPagingKt {
 	public static final fun asPagingItems (Lkotlin/jvm/functions/Function1;Ljava/lang/String;Landroidx/paging/PagingConfig;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun asPagingItems (Lkotlin/jvm/functions/Function1;Ljava/lang/String;Landroidx/paging/PagingConfig;Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/flow/Flow;
 	public static synthetic fun asPagingItems$default (Lkotlin/jvm/functions/Function1;Ljava/lang/String;Landroidx/paging/PagingConfig;ILjava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
+	public static synthetic fun asPagingItems$default (Lkotlin/jvm/functions/Function1;Ljava/lang/String;Landroidx/paging/PagingConfig;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
 }
 
 public final class dev/arunkumar/compass/paging/RealmTiledDataSource : dev/arunkumar/compass/paging/TiledDataSource {
@@ -9,13 +11,6 @@ public final class dev/arunkumar/compass/paging/RealmTiledDataSource : dev/arunk
 }
 
 public final class dev/arunkumar/compass/paging/RealmTiledDataSource$Factory : androidx/paging/DataSource$Factory {
-	public fun <init> (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;)V
-	public synthetic fun <init> (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public synthetic fun create ()Landroidx/paging/DataSource;
-	public fun create ()Ldev/arunkumar/compass/paging/RealmTiledDataSource;
-}
-
-public final class dev/arunkumar/compass/paging/RealmTiledDataSource$TransformFactory : androidx/paging/DataSource$Factory {
 	public fun <init> (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;)V
 	public synthetic fun create ()Landroidx/paging/DataSource;
 	public fun create ()Ldev/arunkumar/compass/paging/RealmTiledDataSource;

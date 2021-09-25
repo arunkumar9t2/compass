@@ -29,7 +29,7 @@ public class RealmTiledDataSource<T : RealmModel, R : Any> internal constructor(
   private val transform: RealmModelTransform<T, R>
 ) : TiledDataSource<R>() {
 
-  public class Factory<T : RealmModel>(
+  internal class NoOpTransformFactory<T : RealmModel>(
     private val realmQueryBuilder: RealmQueryBuilder<T>,
     private val transform: RealmModelTransform<T, T> = RealmCopyTransform()
   ) : DataSource.Factory<Int, T>() {
@@ -39,7 +39,7 @@ public class RealmTiledDataSource<T : RealmModel, R : Any> internal constructor(
     )
   }
 
-  public class TransformFactory<T : RealmModel, R : Any>(
+  public class Factory<T : RealmModel, R : Any>(
     private val realmQueryBuilder: RealmQueryBuilder<T>,
     private val transform: RealmModelTransform<T, R>
   ) : DataSource.Factory<Int, R>() {

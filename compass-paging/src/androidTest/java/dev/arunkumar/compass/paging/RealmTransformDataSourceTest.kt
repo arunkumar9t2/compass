@@ -48,7 +48,7 @@ public class RealmTransformDataSourceTest {
     data class PersonMapped(val id: String, val name: String)
 
     val realmQueryBuilder = RealmQuery { where<Person>() }
-    val factory = RealmTiledDataSource.TransformFactory(realmQueryBuilder) { person ->
+    val factory = RealmTiledDataSource.Factory(realmQueryBuilder) { person ->
       PersonMapped(person.id.toString(), person.name)
     }
     val pagingSource = factory.asPagingSourceFactory(realmDispatcher).invoke()
