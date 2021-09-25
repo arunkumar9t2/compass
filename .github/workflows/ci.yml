@@ -67,7 +67,7 @@ jobs:
             gradle/libs.versions.toml
             build-logic/**/Constants.kt
           arguments: app:testDebugUnitTest --scan
-  instrumentation-tests:
+  ui-tests:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
