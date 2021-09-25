@@ -15,6 +15,7 @@
  */
 plugins {
   id "build-common"
+  id "publish-common"
 }
 
 task clean(type: Delete) {
