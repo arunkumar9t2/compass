@@ -4,13 +4,19 @@ public final class dev/arunkumar/compass/paging/RealmPagingKt {
 }
 
 public final class dev/arunkumar/compass/paging/RealmTiledDataSource : dev/arunkumar/compass/paging/TiledDataSource {
-	public fun <init> (Lkotlin/jvm/functions/Function1;)V
 	public fun countItems ()I
 	public fun loadRange (II)Ljava/util/List;
 }
 
 public final class dev/arunkumar/compass/paging/RealmTiledDataSource$Factory : androidx/paging/DataSource$Factory {
-	public fun <init> (Lkotlin/jvm/functions/Function1;)V
+	public fun <init> (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;)V
+	public synthetic fun <init> (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun create ()Landroidx/paging/DataSource;
+	public fun create ()Ldev/arunkumar/compass/paging/RealmTiledDataSource;
+}
+
+public final class dev/arunkumar/compass/paging/RealmTiledDataSource$TransformFactory : androidx/paging/DataSource$Factory {
+	public fun <init> (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;)V
 	public synthetic fun create ()Landroidx/paging/DataSource;
 	public fun create ()Ldev/arunkumar/compass/paging/RealmTiledDataSource;
 }

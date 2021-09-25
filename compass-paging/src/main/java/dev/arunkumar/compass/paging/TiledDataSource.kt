@@ -17,10 +17,9 @@
 package dev.arunkumar.compass.paging
 
 import androidx.paging.PositionalDataSource
-import io.realm.RealmModel
 
 @Suppress("DEPRECATION")
-public abstract class TiledDataSource<T : RealmModel> : PositionalDataSource<T>() {
+public abstract class TiledDataSource<T : Any> : PositionalDataSource<T>() {
 
   public abstract fun countItems(): Int
 
