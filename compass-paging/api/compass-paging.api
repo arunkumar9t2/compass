@@ -1,0 +1,25 @@
+public final class dev/arunkumar/compass/paging/RealmPagingKt {
+	public static final fun asPagingItems (Lkotlin/jvm/functions/Function1;Ljava/lang/String;Landroidx/paging/PagingConfig;)Lkotlinx/coroutines/flow/Flow;
+	public static synthetic fun asPagingItems$default (Lkotlin/jvm/functions/Function1;Ljava/lang/String;Landroidx/paging/PagingConfig;ILjava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
+}
+
+public final class dev/arunkumar/compass/paging/RealmTiledDataSource : dev/arunkumar/compass/paging/TiledDataSource {
+	public fun <init> (Lkotlin/jvm/functions/Function1;)V
+	public fun countItems ()I
+	public fun loadRange (II)Ljava/util/List;
+}
+
+public final class dev/arunkumar/compass/paging/RealmTiledDataSource$Factory : androidx/paging/DataSource$Factory {
+	public fun <init> (Lkotlin/jvm/functions/Function1;)V
+	public synthetic fun create ()Landroidx/paging/DataSource;
+	public fun create ()Ldev/arunkumar/compass/paging/RealmTiledDataSource;
+}
+
+public abstract class dev/arunkumar/compass/paging/TiledDataSource : androidx/paging/PositionalDataSource {
+	public fun <init> ()V
+	public abstract fun countItems ()I
+	public fun loadInitial (Landroidx/paging/PositionalDataSource$LoadInitialParams;Landroidx/paging/PositionalDataSource$LoadInitialCallback;)V
+	public abstract fun loadRange (II)Ljava/util/List;
+	public fun loadRange (Landroidx/paging/PositionalDataSource$LoadRangeParams;Landroidx/paging/PositionalDataSource$LoadRangeCallback;)V
+}
+
