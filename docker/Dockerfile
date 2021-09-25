@@ -42,6 +42,6 @@ RUN mkdir "$ANDROID_SDK_ROOT" && \
     rm commandlinetools.zip && \
     # Setup sdkmanager
     yes | sdkmanager --licenses && \
-    sdkmanager tools platform-tools "platforms;android-30" "build-tools;30.0.3" --verbose
+    sdkmanager tools platform-tools "platforms;android-30" "build-tools;30.0.3" "build-tools;30.0.2" --verbose
 
 ENV GRADLE_USER_HOME=/github/home/.gradle

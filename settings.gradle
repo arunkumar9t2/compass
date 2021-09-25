@@ -55,3 +55,4 @@ if (isCiServer) {
 rootProject.name = "compass-realm"
 include ":app"
 include ":compass"
+include ":compass-paging"
