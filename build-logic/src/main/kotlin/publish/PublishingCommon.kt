@@ -43,7 +43,7 @@ public class PublishingCommon : ConfigurablePlugin({
     }
   }
 
-  allprojects {
+  subprojects {
     group = findProperty("groupId").toString()
     version = if (hasProperty("snapshot")) "main-SNAPSHOT" else COMPASS_RELEASE_VERSION
   }
