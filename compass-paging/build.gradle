@@ -31,6 +31,8 @@ dependencies {
   testImplementation(deps.kotlin.test)
   testImplementation(deps.kotlinx.coroutines.test)
   testImplementation(deps.turbine)
+
+  androidTestImplementation project(path: ":compass-tests")
   androidTestImplementation(deps.kotlin.test)
   androidTestImplementation(deps.androidx.junit)
   androidTestImplementation(deps.androidx.espresso)
