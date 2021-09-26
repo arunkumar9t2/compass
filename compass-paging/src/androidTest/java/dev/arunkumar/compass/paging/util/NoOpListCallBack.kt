@@ -13,25 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@file:Suppress("NOTHING_TO_INLINE")
 
-package dev.arunkumar.compass
+package dev.arunkumar.compass.paging.util
 
-import io.realm.Realm
-import io.realm.RealmModel
-import io.realm.RealmQuery
+import androidx.recyclerview.widget.ListUpdateCallback
 
-public typealias RealmQueryBuilder<T> = Realm.() -> RealmQuery<T>
+public object NoOpListCallBack : ListUpdateCallback {
+  override fun onInserted(position: Int, count: Int) {
+  }
 
-internal inline fun <T : RealmModel> RealmQueryBuilder<T>.buildQuery(realm: Realm): RealmQuery<T> {
-  return invoke(realm)
-}
+  override fun onRemoved(position: Int, count: Int) {
+  }
 
-@Suppress("FunctionName")
-public fun <T : RealmModel> RealmQuery(
-  builder: RealmQueryBuilder<T>
-): RealmQueryBuilder<T> = builder
+  override fun onMoved(fromPosition: Int, toPosition: Int) {
+  }
 
-public fun <T : RealmModel> RealmQueryBuilder<T>.getAll(): List<T> {
-  return RealmFunction { realm -> buildQuery(realm).findAll() }
+  override fun onChanged(position: Int, count: Int, payload: Any?) {
+  }
 }

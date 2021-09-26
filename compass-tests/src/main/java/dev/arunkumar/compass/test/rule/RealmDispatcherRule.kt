@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.arunkumar.compass.rule
+package dev.arunkumar.compass.test.rule
 
 import dev.arunkumar.compass.thread.RealmDispatcher
 import org.junit.rules.ExternalResource

@@ -1,4 +1,5 @@
 public final class dev/arunkumar/compass/RealmFlowKt {
+	public static final fun RealmCopyTransform ()Lkotlin/jvm/functions/Function2;
 	public static final fun asFlow (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;)Lkotlinx/coroutines/flow/Flow;
 	public static final fun asFlow (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/flow/Flow;
 	public static synthetic fun asFlow$default (Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function0;ILjava/lang/Object;)Lkotlinx/coroutines/flow/Flow;

@@ -14,12 +14,21 @@
  * limitations under the License.
  */
 
-package dev.arunkumar.compass.entity
+plugins {
+  id "android-library-plugin"
+  id "org.jetbrains.kotlin.kapt"
+}
+apply plugin: "realm-android"
 
-import io.realm.RealmObject
-import java.util.*
+dependencies {
+  implementation deps.kotlinx.coroutines.android
+  implementation project(path: ":compass")
 
-public open class Person(
-  public var id: UUID = UUID.randomUUID(),
-  public var name: String = id.toString().substring(0, 6)
-) : RealmObject()
+  implementation(deps.junit)
+  implementation(deps.kotlin.test)
+  implementation(deps.kotlinx.coroutines.test)
+  implementation(deps.turbine)
+  implementation(deps.androidx.junit)
+  implementation(deps.androidx.espresso)
+  implementation(deps.androidx.test.runner)
+}

@@ -88,6 +88,7 @@ internal fun Project.androidCommon() {
         "-Xopt-in=kotlin.time.ExperimentalTime",
         "-Xopt-in=kotlin.experimental.ExperimentalTypeInference",
         "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+        "-Xopt-in=kotlinx.coroutines.FlowPreview",
         "-Xexplicit-api=strict"
       )
     }

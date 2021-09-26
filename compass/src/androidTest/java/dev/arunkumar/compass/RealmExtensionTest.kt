@@ -17,8 +17,8 @@
 package dev.arunkumar.compass
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import dev.arunkumar.compass.entity.Person
-import dev.arunkumar.compass.rule.RealmRule
+import dev.arunkumar.compass.test.entity.Person
+import dev.arunkumar.compass.test.rule.RealmRule
 import io.realm.kotlin.where
 import org.junit.Rule
 import org.junit.Test

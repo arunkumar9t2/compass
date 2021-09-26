@@ -25,10 +25,10 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.isActive
 
-private typealias RealmModelTransform<T, R> = Realm.(realmModel: T) -> R
+public typealias RealmModelTransform<T, R> = Realm.(realmModel: T) -> R
 
 @Suppress("FunctionName")
-private fun <T : RealmModel, R> RealmCopyTransform(): RealmModelTransform<T, R> {
+public fun <T : RealmModel, R> RealmCopyTransform(): RealmModelTransform<T, R> {
   return { model -> copyFromRealm(model) as R }
 }
 private typealias RealmDispatcherProvider = () -> RealmDispatcher
@@ -49,7 +49,7 @@ public fun <T : RealmModel, R> RealmQueryBuilder<T>.asFlow(
   }.flatMapConcat { realmDispatcher: RealmDispatcher ->
     callbackFlow {
       val realm = DefaultRealm()
-      val realmQuery = this@asFlow(realm)
+      val realmQuery = buildQuery(realm)
       val results = realmQuery.findAll()
 
       if (!results.isValid) {

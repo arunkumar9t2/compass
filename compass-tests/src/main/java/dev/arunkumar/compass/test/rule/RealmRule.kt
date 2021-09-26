@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package dev.arunkumar.compass.rule
+package dev.arunkumar.compass.test.rule
 
 import androidx.test.core.app.ApplicationProvider
 import dev.arunkumar.compass.DefaultRealm
-import dev.arunkumar.compass.entity.Person
+import dev.arunkumar.compass.test.entity.Person
 import dev.arunkumar.compass.transact
 import io.realm.Realm
 import io.realm.RealmConfiguration
@@ -29,7 +29,8 @@ import kotlinx.coroutines.withContext
 import org.junit.rules.ExternalResource
 
 public class RealmRule(
-  private val dispatcherProvider: () -> CoroutineDispatcher = { Dispatchers.IO }
+  private val noOfInitialItems: Int = 30,
+  private val dispatcherProvider: () -> CoroutineDispatcher = { Dispatchers.IO },
 ) : ExternalResource() {
 
   private val dispatcher get() = dispatcherProvider()
@@ -43,7 +44,7 @@ public class RealmRule(
         .allowQueriesOnUiThread(false)
         .allowWritesOnUiThread(false)
         .initialData { realm ->
-          realm.insertOrUpdate((1..30).map { Person() })
+          realm.insertOrUpdate((1..noOfInitialItems).map { Person() })
         }.build()
       Realm.setDefaultConfiguration(realmConfiguration)
       realm = DefaultRealm()

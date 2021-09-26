@@ -1,0 +1,67 @@
+public abstract class dev/arunkumar/compass/test/RealmTest {
+	public fun <init> ()V
+	protected fun getRealmDispatcher ()Ldev/arunkumar/compass/thread/RealmDispatcher;
+	protected fun getRealmDispatcherRule ()Ldev/arunkumar/compass/test/rule/RealmDispatcherRule;
+	protected fun getRealmRule ()Ldev/arunkumar/compass/test/rule/RealmRule;
+	public final fun getRules ()Lorg/junit/rules/TestRule;
+}
+
+public class dev/arunkumar/compass/test/entity/Person : io/realm/RealmObject {
+	public fun <init> ()V
+	public fun <init> (Ljava/util/UUID;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/util/UUID;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getId ()Ljava/util/UUID;
+	public final fun getName ()Ljava/lang/String;
+	public final fun setId (Ljava/util/UUID;)V
+	public final fun setName (Ljava/lang/String;)V
+}
+
+public final class dev/arunkumar/compass/test/rule/RealmDispatcherRule : org/junit/rules/ExternalResource {
+	public field dispatcher Ldev/arunkumar/compass/thread/RealmDispatcher;
+	public fun <init> ()V
+	public final fun getDispatcher ()Ldev/arunkumar/compass/thread/RealmDispatcher;
+	public final fun setDispatcher (Ldev/arunkumar/compass/thread/RealmDispatcher;)V
+}
+
+public final class dev/arunkumar/compass/test/rule/RealmRule : org/junit/rules/ExternalResource {
+	public fun <init> ()V
+	public fun <init> (ILkotlin/jvm/functions/Function0;)V
+	public synthetic fun <init> (ILkotlin/jvm/functions/Function0;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public class io/realm/dev_arunkumar_compass_test_entity_PersonRealmProxy : dev/arunkumar/compass/test/entity/Person, io/realm/dev_arunkumar_compass_test_entity_PersonRealmProxyInterface, io/realm/internal/RealmObjectProxy {
+	public static fun copy (Lio/realm/Realm;Lio/realm/dev_arunkumar_compass_test_entity_PersonRealmProxy$PersonColumnInfo;Ldev/arunkumar/compass/test/entity/Person;ZLjava/util/Map;Ljava/util/Set;)Ldev/arunkumar/compass/test/entity/Person;
+	public static fun copyOrUpdate (Lio/realm/Realm;Lio/realm/dev_arunkumar_compass_test_entity_PersonRealmProxy$PersonColumnInfo;Ldev/arunkumar/compass/test/entity/Person;ZLjava/util/Map;Ljava/util/Set;)Ldev/arunkumar/compass/test/entity/Person;
+	public static fun createColumnInfo (Lio/realm/internal/OsSchemaInfo;)Lio/realm/dev_arunkumar_compass_test_entity_PersonRealmProxy$PersonColumnInfo;
+	public static fun createDetachedCopy (Ldev/arunkumar/compass/test/entity/Person;IILjava/util/Map;)Ldev/arunkumar/compass/test/entity/Person;
+	public static fun createOrUpdateUsingJsonObject (Lio/realm/Realm;Lorg/json/JSONObject;Z)Ldev/arunkumar/compass/test/entity/Person;
+	public static fun createUsingJsonStream (Lio/realm/Realm;Landroid/util/JsonReader;)Ldev/arunkumar/compass/test/entity/Person;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun getExpectedObjectSchemaInfo ()Lio/realm/internal/OsObjectSchemaInfo;
+	public static fun getSimpleClassName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun insert (Lio/realm/Realm;Ldev/arunkumar/compass/test/entity/Person;Ljava/util/Map;)J
+	public static fun insert (Lio/realm/Realm;Ljava/util/Iterator;Ljava/util/Map;)V
+	public static fun insertOrUpdate (Lio/realm/Realm;Ldev/arunkumar/compass/test/entity/Person;Ljava/util/Map;)J
+	public static fun insertOrUpdate (Lio/realm/Realm;Ljava/util/Iterator;Ljava/util/Map;)V
+	public fun realm$injectObjectContext ()V
+	public fun realmGet$id ()Ljava/util/UUID;
+	public fun realmGet$name ()Ljava/lang/String;
+	public fun realmGet$proxyState ()Lio/realm/ProxyState;
+	public fun realmSet$id (Ljava/util/UUID;)V
+	public fun realmSet$name (Ljava/lang/String;)V
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class io/realm/dev_arunkumar_compass_test_entity_PersonRealmProxy$ClassNameHelper {
+	public static final field INTERNAL_CLASS_NAME Ljava/lang/String;
+	public fun <init> ()V
+}
+
+public abstract interface class io/realm/dev_arunkumar_compass_test_entity_PersonRealmProxyInterface {
+	public abstract fun realmGet$id ()Ljava/util/UUID;
+	public abstract fun realmGet$name ()Ljava/lang/String;
+	public abstract fun realmSet$id (Ljava/util/UUID;)V
+	public abstract fun realmSet$name (Ljava/lang/String;)V
+}
+
