@@ -3,6 +3,7 @@ public final class dev/arunkumar/compass/paging/RealmPagingKt {
 	public static final fun asPagingItems (Lkotlin/jvm/functions/Function1;Ljava/lang/String;Landroidx/paging/PagingConfig;Lkotlin/jvm/functions/Function2;)Lkotlinx/coroutines/flow/Flow;
 	public static synthetic fun asPagingItems$default (Lkotlin/jvm/functions/Function1;Ljava/lang/String;Landroidx/paging/PagingConfig;ILjava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
 	public static synthetic fun asPagingItems$default (Lkotlin/jvm/functions/Function1;Ljava/lang/String;Landroidx/paging/PagingConfig;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun getDefaultPagingConfig ()Landroidx/paging/PagingConfig;
 }
 
 public final class dev/arunkumar/compass/paging/RealmTiledDataSource : dev/arunkumar/compass/paging/TiledDataSource {
