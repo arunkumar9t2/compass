@@ -20,31 +20,20 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingSource.LoadResult.Page.Companion.COUNT_UNDEFINED
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import dev.arunkumar.compass.RealmQuery
+import dev.arunkumar.compass.test.RealmTest
 import dev.arunkumar.compass.test.entity.Person
-import dev.arunkumar.compass.test.rule.RealmDispatcherRule
 import dev.arunkumar.compass.test.rule.RealmRule
-import dev.arunkumar.compass.thread.RealmDispatcher
 import io.realm.kotlin.where
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.RuleChain
-import org.junit.rules.TestRule
 import org.junit.runner.RunWith
 import kotlin.test.assertTrue
 
 @RunWith(AndroidJUnit4::class)
-public class RealmDataSourceTest {
+public class RealmDataSourceTest : RealmTest() {
 
-  private val realmDispatcherRule: RealmDispatcherRule = RealmDispatcherRule()
-  private val realmDispatcher: RealmDispatcher get() = realmDispatcherRule.dispatcher
-  private val realmRule: RealmRule = RealmRule(100) { realmDispatcher }
-
-  @get:Rule
-  public val rules: TestRule = RuleChain
-    .outerRule(realmDispatcherRule)
-    .around(realmRule)
+  override val realmRule: RealmRule = RealmRule(100) { realmDispatcher }
 
   private lateinit var pagingSource: PagingSource<Int, Person>
 

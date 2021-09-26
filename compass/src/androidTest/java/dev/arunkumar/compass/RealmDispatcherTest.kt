@@ -17,35 +17,21 @@
 package dev.arunkumar.compass
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import dev.arunkumar.compass.test.RealmTest
 import dev.arunkumar.compass.test.entity.Person
-import dev.arunkumar.compass.test.rule.RealmDispatcherRule
-import dev.arunkumar.compass.test.rule.RealmRule
-import dev.arunkumar.compass.thread.RealmDispatcher
 import io.realm.RealmChangeListener
 import io.realm.RealmResults
 import io.realm.kotlin.where
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.RuleChain
-import org.junit.rules.TestRule
 import org.junit.runner.RunWith
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import kotlin.test.assertTrue
 
 @RunWith(AndroidJUnit4::class)
-public class RealmDispatcherTest {
-
-  private val realmDispatcherRule: RealmDispatcherRule = RealmDispatcherRule()
-  private val realmDispatcher: RealmDispatcher get() = realmDispatcherRule.dispatcher
-  private val realmRule: RealmRule = RealmRule { realmDispatcher }
-
-  @get:Rule
-  public val rules: TestRule = RuleChain
-    .outerRule(realmDispatcherRule)
-    .around(realmRule)
+public class RealmDispatcherTest : RealmTest() {
 
   @Test
   public fun assertChangeListenerAddedOnRealmDispatcherWorks(): Unit = runBlocking {

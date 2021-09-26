@@ -22,34 +22,23 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.cash.turbine.test
 import dev.arunkumar.compass.RealmQuery
 import dev.arunkumar.compass.paging.util.NoOpListCallBack
+import dev.arunkumar.compass.test.RealmTest
 import dev.arunkumar.compass.test.entity.Person
-import dev.arunkumar.compass.test.rule.RealmDispatcherRule
 import dev.arunkumar.compass.test.rule.RealmRule
-import dev.arunkumar.compass.thread.RealmDispatcher
 import io.realm.kotlin.where
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.junit.Ignore
-import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.RuleChain
-import org.junit.rules.TestRule
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 @Ignore("To figure out testing pagingItems")
-public class RealmPagingItemsTest {
+public class RealmPagingItemsTest : RealmTest() {
 
-  private val realmDispatcherRule: RealmDispatcherRule = RealmDispatcherRule()
-  private val realmDispatcher: RealmDispatcher get() = realmDispatcherRule.dispatcher
-  private val realmRule: RealmRule = RealmRule(100) { realmDispatcher }
-
-  @get:Rule
-  public val rules: TestRule = RuleChain
-    .outerRule(realmDispatcherRule)
-    .around(realmRule)
+  protected override val realmRule: RealmRule = RealmRule(100) { realmDispatcher }
 
   @Test
   public fun assertPagingItemsEmitsChangesInResponseToDataChanges(): Unit = runBlocking {
