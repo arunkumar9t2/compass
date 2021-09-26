@@ -16,6 +16,7 @@
 
 package dev.arunkumar.compass.paging
 
+import android.annotation.SuppressLint
 import androidx.paging.PositionalDataSource
 
 @Suppress("DEPRECATION")
@@ -25,7 +26,9 @@ public abstract class TiledDataSource<T : Any> : PositionalDataSource<T>() {
 
   public abstract fun loadRange(startPosition: Int, count: Int): List<T>?
 
+  @SuppressLint("RestrictedApi") // For computeInitialLoadPosition, computeInitialLoadSize
   override fun loadInitial(
+
     params: LoadInitialParams,
     callback: LoadInitialCallback<T>
   ) {
