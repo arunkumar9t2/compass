@@ -1,3 +1,11 @@
+public abstract class dev/arunkumar/compass/test/RealmTest {
+	public fun <init> ()V
+	protected fun getRealmDispatcher ()Ldev/arunkumar/compass/thread/RealmDispatcher;
+	protected fun getRealmDispatcherRule ()Ldev/arunkumar/compass/test/rule/RealmDispatcherRule;
+	protected fun getRealmRule ()Ldev/arunkumar/compass/test/rule/RealmRule;
+	public final fun getRules ()Lorg/junit/rules/TestRule;
+}
+
 public class dev/arunkumar/compass/test/entity/Person : io/realm/RealmObject {
 	public fun <init> ()V
 	public fun <init> (Ljava/util/UUID;Ljava/lang/String;)V
