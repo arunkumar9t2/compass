@@ -15,6 +15,5 @@
   -->
 
 <resources>
-    <!--TODO Change app name-->
     <string name="app_name">Compass</string>
 </resources>

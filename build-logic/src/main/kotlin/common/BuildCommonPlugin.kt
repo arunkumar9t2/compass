@@ -61,7 +61,7 @@ private fun Project.configureApiValidation() {
   // Configure API checks
   apply(plugin = "org.jetbrains.kotlinx.binary-compatibility-validator")
   configure<ApiValidationExtension> {
-    ignoredProjects.add("app")
+    ignoredProjects.add("compass-sample")
   }
 }
 

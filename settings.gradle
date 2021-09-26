@@ -53,7 +53,7 @@ if (isCiServer) {
 }
 
 rootProject.name = "compass-realm"
-include ":app"
+include ":compass-sample"
 include ":compass"
 include ":compass-paging"
 include ":compass-tests"
