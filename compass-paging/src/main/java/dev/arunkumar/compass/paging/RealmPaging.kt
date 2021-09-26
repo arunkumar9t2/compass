@@ -29,14 +29,16 @@ import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onCompletion
 
+public val DefaultPagingConfig: PagingConfig = PagingConfig(
+  pageSize = 20,
+  prefetchDistance = 20 * 3,
+  initialLoadSize = 20 * 3,
+  enablePlaceholders = false,
+)
+
 public fun <T : RealmModel> RealmQueryBuilder<T>.asPagingItems(
   tag: String = "PagingItemsExecutor",
-  pagingConfig: PagingConfig = PagingConfig(
-    pageSize = 20,
-    prefetchDistance = 20 * 3,
-    initialLoadSize = 20 * 3,
-    enablePlaceholders = false,
-  )
+  pagingConfig: PagingConfig = DefaultPagingConfig
 ): Flow<PagingData<T>> {
   return asPagingItems(
     tag = tag,
@@ -47,12 +49,7 @@ public fun <T : RealmModel> RealmQueryBuilder<T>.asPagingItems(
 
 public fun <T : RealmModel, R : Any> RealmQueryBuilder<T>.asPagingItems(
   tag: String = "PagingItemsExecutor",
-  pagingConfig: PagingConfig = PagingConfig(
-    pageSize = 20,
-    prefetchDistance = 20 * 3,
-    initialLoadSize = 20 * 3,
-    enablePlaceholders = false,
-  ),
+  pagingConfig: PagingConfig = DefaultPagingConfig,
   realmModelTransform: RealmModelTransform<T, R>
 ): Flow<PagingData<R>> {
   val realmQueryBuilder = this
