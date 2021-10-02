@@ -18,15 +18,24 @@ package dev.arunkumar.compass.sample.data.tasks
 
 import androidx.paging.PagingData
 import dev.arunkumar.compass.RealmQuery
+import dev.arunkumar.compass.RealmTransaction
 import dev.arunkumar.compass.paging.asPagingItems
 import io.realm.RealmQuery
 import io.realm.kotlin.where
 import kotlinx.coroutines.flow.Flow
 
 public class TaskRepository {
+
   public fun tasks(query: RealmQuery<Task>.() -> Unit): Flow<PagingData<Task>> {
-    return RealmQuery {
-      where<Task>().apply(query)
-    }.asPagingItems()
+    addTasksIfEmpty()
+    return RealmQuery { where<Task>().apply(query) }.asPagingItems()
+  }
+
+  private fun addTasksIfEmpty() {
+    RealmTransaction {
+      if (where<Task>().findAll().isEmpty()) {
+        copyToRealmOrUpdate((0..3000).map { Task() })
+      }
+    }
   }
 }

@@ -20,6 +20,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import dev.arunkumar.compass.sample.common.DefaultDispatcherProvider
+import dev.arunkumar.compass.sample.common.DispatcherProvider
 import dev.arunkumar.compass.sample.data.tasks.Task
 import dev.arunkumar.compass.sample.data.tasks.TaskRepository
 import kotlinx.coroutines.asCoroutineDispatcher
@@ -37,7 +39,8 @@ public sealed class UiAction {
 }
 
 public class TasksViewModel(
-  private val tasksRepository: TaskRepository = TaskRepository()
+  private val tasksRepository: TaskRepository = TaskRepository(),
+  private val dispatchers: DispatcherProvider = DefaultDispatcherProvider()
 ) : ViewModel() {
   private val reducerDispatcher = Executors.newSingleThreadExecutor().asCoroutineDispatcher()
 
@@ -51,8 +54,11 @@ public class TasksViewModel(
     .onStart { emit(UiAction.LoadTasks) }
     .debounce(300)
     .mapLatest {
-      tasksRepository.tasks { sort(Task.NAME) }.cachedIn(viewModelScope)
-    }.map { tasks -> Reducer { copy(tasks = tasks) } }
+      tasksRepository
+        .tasks { sort(Task.NAME) }
+        .cachedIn(viewModelScope)
+    }.flowOn(dispatchers.io)
+    .map { tasks -> Reducer { copy(tasks = tasks) } }
 
   public val state: StateFlow<TasksState> = merge(
     loadTasks
