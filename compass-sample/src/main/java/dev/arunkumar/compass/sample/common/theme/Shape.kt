@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.arunkumar.compass.ui.theme
+package dev.arunkumar.compass.sample.common.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes
