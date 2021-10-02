@@ -41,7 +41,7 @@ public sealed class UiAction {
 public class TasksViewModel(
   private val tasksRepository: TaskRepository = TaskRepository(),
   dispatchers: DispatcherProvider = DefaultDispatcherProvider(),
-  private val initialState: TasksState = TasksState(),
+  initialState: TasksState = TasksState(),
 ) : ViewModel() {
   private val reducerDispatcher = Executors.newSingleThreadExecutor().asCoroutineDispatcher()
 
