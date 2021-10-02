@@ -38,4 +38,11 @@ public class TaskRepository {
       }
     }
   }
+
+  public fun clear() {
+    RealmTransaction {
+      where<Task>().findAll().deleteAllFromRealm()
+    }
+    addTasksIfEmpty()
+  }
 }

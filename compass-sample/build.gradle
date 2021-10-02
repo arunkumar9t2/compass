@@ -34,6 +34,7 @@ dependencies {
   implementation(deps.compose.viewmodel)
   implementation(deps.compose.paging)
   implementation(deps.compose.material)
+  implementation(deps.compose.material.icons)
   implementation(deps.compose.ui.ui)
   implementation(deps.compose.ui.toolingpreview)
   debugImplementation(deps.compose.ui.tooling)

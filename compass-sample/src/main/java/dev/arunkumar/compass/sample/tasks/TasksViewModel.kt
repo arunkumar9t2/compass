@@ -40,7 +40,8 @@ public sealed class UiAction {
 
 public class TasksViewModel(
   private val tasksRepository: TaskRepository = TaskRepository(),
-  private val dispatchers: DispatcherProvider = DefaultDispatcherProvider()
+  dispatchers: DispatcherProvider = DefaultDispatcherProvider(),
+  private val initialState: TasksState = TasksState(),
 ) : ViewModel() {
   private val reducerDispatcher = Executors.newSingleThreadExecutor().asCoroutineDispatcher()
 
@@ -60,14 +61,20 @@ public class TasksViewModel(
     }.flowOn(dispatchers.io)
     .map { tasks -> Reducer { copy(tasks = tasks) } }
 
+  private val clearTasks: Flow<Reducer> = onAction<UiAction.ClearTasks>()
+    .debounce(300)
+    .onEach { tasksRepository.clear() }
+    .map { Reducer { this } }
+
   public val state: StateFlow<TasksState> = merge(
-    loadTasks
-  ).scan(TasksState()) { state, reducer -> reducer(state) }
+    loadTasks,
+    clearTasks
+  ).scan(initialState) { state, reducer -> reducer(state) }
     .flowOn(reducerDispatcher)
     .stateIn(
       scope = viewModelScope,
       started = SharingStarted.WhileSubscribed(10000),
-      initialValue = TasksState()
+      initialValue = initialState
     )
 
   private inline fun <reified Action : UiAction> onAction() = actionsFlow.filterIsInstance<Action>()

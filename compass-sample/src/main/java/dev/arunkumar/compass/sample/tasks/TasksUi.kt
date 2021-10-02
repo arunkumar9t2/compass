@@ -16,15 +16,17 @@
 
 package dev.arunkumar.compass.sample.tasks
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.ClearAll
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -38,30 +40,37 @@ public fun Compass(
   state: TasksState,
   tasksViewModel: TasksViewModel
 ) {
+  val fabShape = MaterialTheme.shapes.small.copy(CornerSize(percent = 50))
   Scaffold(
     scaffoldState = rememberScaffoldState(),
     topBar = {
-      TopAppBar {
-        Box {
-          Text(
-            text = "Tasks",
-            style = MaterialTheme.typography.h6,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth()
-          )
-        }
-      }
     },
-    isFloatingActionButtonDocked = false,
+    isFloatingActionButtonDocked = true,
     floatingActionButton = {
       FloatingActionButton(
         onClick = { tasksViewModel.perform(UiAction.ClearTasks) },
+        shape = fabShape,
         content = {
-          Icon(Icons.Default.Clear, contentDescription = "Clear tasks")
+          Icon(Icons.Default.ClearAll, contentDescription = "Clear tasks")
         }
       )
     },
     floatingActionButtonPosition = FabPosition.End,
+    bottomBar = {
+      BottomAppBar(
+        modifier = Modifier.animateContentSize(),
+        cutoutShape = fabShape
+      ) {
+        Row(
+          verticalAlignment = Alignment.CenterVertically,
+          horizontalArrangement = Arrangement.End,
+          modifier = Modifier
+            .fillMaxSize()
+            .padding(8.dp)
+        ) {
+        }
+      }
+    },
     content = { innerPadding ->
       TasksList(state.tasks, innerPadding, taskContent = { task ->
         if (task != null) {
