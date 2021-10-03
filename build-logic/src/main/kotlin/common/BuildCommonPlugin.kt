@@ -23,9 +23,12 @@ import gradle.deps
 import gradle.version
 import kotlinx.validation.ApiValidationExtension
 import org.gradle.api.Project
+import org.gradle.api.tasks.Copy
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.register
 import org.jetbrains.dokka.gradle.DokkaPlugin
+import java.io.File
 
 /**
  * Common build plugin that should be applied to root `build.gradle` file. This plugin can be used
@@ -62,6 +65,16 @@ public class BuildCommonPlugin : ConfigurablePlugin({
 
 private fun Project.configureDokka() {
   apply<DokkaPlugin>()
+  apply<DokkaPlugin>()
+  // Register publish documentation tasks
+  val dokkaOut = File(rootProject.buildDir, "dokka/htmlMultiModule")
+  val siteDir = File(rootProject.projectDir, "site")
+  tasks.register<Copy>("copyDocs") {
+    group = "documentation"
+    from(dokkaOut)
+    into(siteDir)
+    dependsOn(project.tasks.named("dokkaHtmlMultiModule"))
+  }
 }
 
 private fun Project.configureApiValidation() {

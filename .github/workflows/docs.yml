@@ -1,0 +1,30 @@
+name: Docs
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**/src/**'
+
+env:
+  TERM: dumb
+
+jobs:
+  publish-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Publish documentation
+        run: |
+          pip install ghp-import
+          echo "Setting up git"
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git remote rm origin
+          git remote add origin https://x-access-token:$GITHUB_TOKEN@github.com/${{ github.repository }}.git
+
+          ghp-import site -f -p
