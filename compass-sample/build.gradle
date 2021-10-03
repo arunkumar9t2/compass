@@ -16,7 +16,9 @@
 
 plugins {
   id "android-binary-plugin"
+  id "org.jetbrains.kotlin.kapt"
 }
+apply plugin: "realm-android"
 
 android {
   buildFeatures {
@@ -29,10 +31,15 @@ dependencies {
   implementation(deps.androidx.lifecycle)
   implementation(deps.androidx.activity.compose)
 
+  implementation(deps.compose.viewmodel)
+  implementation(deps.compose.paging)
   implementation(deps.compose.material)
+  implementation(deps.compose.material.icons)
   implementation(deps.compose.ui.ui)
   implementation(deps.compose.ui.toolingpreview)
   debugImplementation(deps.compose.ui.tooling)
+
+  implementation project(path: ":compass-paging")
 
   testImplementation(deps.junit)
   androidTestImplementation(deps.androidx.junit)

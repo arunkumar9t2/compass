@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dev.arunkumar.compass
+package dev.arunkumar.compass.sample.tasks
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -22,13 +22,14 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import dev.arunkumar.compass.ui.theme.CompassTheme
+import androidx.lifecycle.viewmodel.compose.viewModel
+import dev.arunkumar.compass.sample.common.rememberFlowWithLifecycle
+import dev.arunkumar.compass.sample.common.theme.CompassTheme
 
-public class MainActivity : ComponentActivity() {
+public class TasksActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContent {
@@ -37,22 +38,13 @@ public class MainActivity : ComponentActivity() {
           modifier = Modifier.fillMaxSize(),
           color = MaterialTheme.colors.background
         ) {
-          Greeting("Android S")
+          val viewModel = viewModel<TasksViewModel>()
+          val state by rememberFlowWithLifecycle(flow = viewModel.state)
+            .collectAsState(initial = viewModel.state.value)
+          Compass(state, viewModel)
         }
       }
     }
   }
 }
 
-@Composable
-public fun Greeting(name: String) {
-  Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-public fun DefaultPreview() {
-  CompassTheme {
-    Greeting("Android")
-  }
-}
