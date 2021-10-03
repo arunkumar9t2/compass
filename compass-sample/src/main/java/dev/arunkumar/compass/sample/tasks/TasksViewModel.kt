@@ -69,6 +69,7 @@ public class TasksViewModel(
   private val clearTasks: Flow<Reducer> = onAction<UiAction.ClearTasks>()
     .debounce(300)
     .onEach { tasksRepository.clear() }
+    .flowOn(dispatchers.io)
     .map { Reducer { this } }
     .share()
 

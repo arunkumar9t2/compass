@@ -27,6 +27,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ClearAll
 import androidx.compose.material.icons.filled.Sort
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -108,7 +109,7 @@ private fun BottomBar(fabShape: CornerBasedShape, sortOptions: @Composable () ->
 @Composable
 private fun SortOption(sort: Sort, onToggle: (sort: Sort) -> Unit) {
   val sortOption by rememberSaveable(sort) { mutableStateOf(sort) }
-  val text = if (sortOption == Sort.ASC) "Asc" else "Desc"
+  val text by derivedStateOf { if (sortOption == Sort.ASC) "Asc" else "Desc" }
   Spacer(modifier = Modifier.width(8.dp))
   Box(modifier = Modifier
     .size(48.dp)
