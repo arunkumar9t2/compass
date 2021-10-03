@@ -27,6 +27,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ClearAll
 import androidx.compose.material.icons.filled.Sort
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -38,7 +41,7 @@ import kotlinx.coroutines.flow.Flow
 import java.util.*
 
 @Composable
-public fun Compass(
+public fun Tasks(
   state: TasksState,
   tasksViewModel: TasksViewModel
 ) {
@@ -59,7 +62,14 @@ public fun Compass(
     },
     floatingActionButtonPosition = FabPosition.End,
     bottomBar = {
-      BottomBar(fabShape)
+      BottomBar(
+        fabShape = fabShape,
+        sortOptions = {
+          SortOption(
+            sort = state.sort,
+            onToggle = { sort -> tasksViewModel.perform(UiAction.LoadTasks(sort)) })
+        }
+      )
     },
     content = { innerPadding ->
       TasksList(state.tasks, innerPadding, taskContent = { task ->
@@ -77,7 +87,7 @@ public fun Compass(
 }
 
 @Composable
-private fun BottomBar(fabShape: CornerBasedShape) {
+private fun BottomBar(fabShape: CornerBasedShape, sortOptions: @Composable () -> Unit) {
   BottomAppBar(
     modifier = Modifier.animateContentSize(),
     cutoutShape = fabShape
@@ -90,21 +100,26 @@ private fun BottomBar(fabShape: CornerBasedShape) {
         .padding(8.dp)
     ) {
       Icon(imageVector = Icons.Filled.Sort, contentDescription = "Sort")
-      Spacer(modifier = Modifier.width(8.dp))
-      Box(modifier = Modifier
-        .size(48.dp)
-        .clickable { }
-      ) {
-        Text(text = "Asc", modifier = Modifier.align(alignment = Alignment.Center))
-      }
-      Spacer(modifier = Modifier.width(8.dp))
-      Box(modifier = Modifier
-        .size(48.dp)
-        .clickable { }
-      ) {
-        Text(text = "Desc", modifier = Modifier.align(alignment = Alignment.Center))
-      }
+      sortOptions()
     }
+  }
+}
+
+@Composable
+private fun SortOption(sort: Sort, onToggle: (sort: Sort) -> Unit) {
+  val sortOption by rememberSaveable(sort) { mutableStateOf(sort) }
+  val text = if (sortOption == Sort.ASC) "Asc" else "Desc"
+  Spacer(modifier = Modifier.width(8.dp))
+  Box(modifier = Modifier
+    .size(48.dp)
+    .clickable {
+      onToggle(if (sortOption == Sort.ASC) Sort.DESC else Sort.ASC)
+    }
+  ) {
+    Text(
+      text = text,
+      modifier = Modifier.align(alignment = Alignment.Center)
+    )
   }
 }
 

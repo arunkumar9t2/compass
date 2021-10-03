@@ -31,10 +31,13 @@ import java.util.concurrent.Executors
 
 public data class TasksState(
   val tasks: Flow<PagingData<Task>> = flowOf(PagingData.empty()),
+  val sort: Sort = Sort.ASC
 )
 
+public enum class Sort { ASC, DESC }
+
 public sealed class UiAction {
-  public object LoadTasks : UiAction()
+  public data class LoadTasks(val sort: Sort = Sort.ASC) : UiAction()
   public object ClearTasks : UiAction()
 }
 
@@ -52,19 +55,22 @@ public class TasksViewModel(
   }
 
   private val loadTasks: Flow<Reducer> = onAction<UiAction.LoadTasks>()
-    .onStart { emit(UiAction.LoadTasks) }
+    .onStart { emit(UiAction.LoadTasks()) }
     .debounce(300)
     .mapLatest {
-      tasksRepository
-        .tasks { sort(Task.NAME) }
+      val dbSort = if (it.sort == Sort.ASC) io.realm.Sort.ASCENDING else io.realm.Sort.DESCENDING
+      it.sort to tasksRepository
+        .tasks { sort(Task.NAME, dbSort) }
         .cachedIn(viewModelScope)
     }.flowOn(dispatchers.io)
-    .map { tasks -> Reducer { copy(tasks = tasks) } }
+    .map { (sort, tasks) -> Reducer { copy(tasks = tasks, sort = sort) } }
+    .share()
 
   private val clearTasks: Flow<Reducer> = onAction<UiAction.ClearTasks>()
     .debounce(300)
     .onEach { tasksRepository.clear() }
     .map { Reducer { this } }
+    .share()
 
   public val state: StateFlow<TasksState> = merge(
     loadTasks,
@@ -78,6 +84,7 @@ public class TasksViewModel(
     )
 
   private inline fun <reified Action : UiAction> onAction() = actionsFlow.filterIsInstance<Action>()
+  private fun <T> Flow<T>.share() = shareIn(viewModelScope, SharingStarted.WhileSubscribed())
 
   override fun onCleared() {
     reducerDispatcher.close()
