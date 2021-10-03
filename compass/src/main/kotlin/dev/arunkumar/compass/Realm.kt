@@ -22,13 +22,27 @@ import io.realm.Realm
 import io.realm.RealmList
 import io.realm.RealmModel
 
+/** Type representing a lambda with [Realm] as the parameter. */
 public typealias RealmBlock = (realm: Realm) -> Unit
+/**
+ * Type representing a lambda with [Realm] as the parameter returning
+ * type `T`.
+ */
 public typealias RealmFunction<T> = (realm: Realm) -> T
+/** Type representing a lambda with [Realm] as the receiver. */
 public typealias RealmReceiver = Realm.() -> Unit
 
+/**
+ * Acquires a new instance of [Realm] using [Realm.getDefaultInstance].
+ */
 @Suppress("FunctionName")
 public inline fun DefaultRealm(): Realm = Realm.getDefaultInstance()
 
+/**
+ * Acquires an instance of current default [Realm], runs the [block]
+ * with `realm` as the param. The acquired `realm` is closed when the
+ * function exits
+ */
 @Suppress("FunctionName")
 public inline fun Realm(block: RealmBlock) {
   val realm = DefaultRealm()
@@ -36,6 +50,15 @@ public inline fun Realm(block: RealmBlock) {
   realm.close()
 }
 
+/**
+ * Acquires an instance of current default [Realm], runs the a
+ * [RealmTransaction] with the `realm` as the receiver in [block].
+ * The acquired `realm` is closed when the function exits. If there
+ * is already an active `realm` instance present, consider using
+ * [Realm.transact]
+ *
+ * @see Realm.transact
+ */
 @Suppress("FunctionName")
 public inline fun RealmTransaction(noinline block: RealmReceiver) {
   val realm = DefaultRealm()
@@ -43,16 +66,31 @@ public inline fun RealmTransaction(noinline block: RealmReceiver) {
   realm.close()
 }
 
+/**
+ * Acquires an instance of current default [Realm], runs the given
+ * [block] with the realm and returns the result. The acquired realm is
+ * closed before the function exits.
+ */
 @Suppress("FunctionName")
 public inline fun <T> RealmFunction(block: RealmFunction<T>): T {
   val realm = DefaultRealm()
   return block(realm).also { realm.close() }
 }
 
+/**
+ * Runs [block] with [Realm] as the receiver inside a
+ * [Realm.executeTransaction] block.
+ *
+ * @see Realm.executeTransaction
+ */
 public inline fun Realm.transact(crossinline block: RealmReceiver) {
   executeTransaction { it.block() }
 }
 
+/**
+ * Converts a collection to non managed [io.realm.RealmResults]
+ * instance.
+ */
 public inline fun <reified T : RealmModel> Collection<T>.toRealmList(): RealmList<T> {
   return RealmList(*toTypedArray())
 }
