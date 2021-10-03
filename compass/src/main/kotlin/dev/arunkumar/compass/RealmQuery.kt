@@ -21,17 +21,43 @@ import io.realm.Realm
 import io.realm.RealmModel
 import io.realm.RealmQuery
 
+/**
+ * A type representing a lambda with [Realm] as the receiver returning [RealmQuery] of [RealmModel]
+ *
+ * Use [RealmQueryBuilder] to construct `RealmQuery` instances. Various extensions are implemented on
+ * [RealmQueryBuilder] as a thread-safe alternative to [RealmQuery] methods.
+ */
 public typealias RealmQueryBuilder<T> = Realm.() -> RealmQuery<T>
 
+/**
+ * Use `buildQuery` to construct a [RealmQuery] from [RealmQueryBuilder] when a [Realm] instance is available.
+ */
 internal inline fun <T : RealmModel> RealmQueryBuilder<T>.buildQuery(realm: Realm): RealmQuery<T> {
   return invoke(realm)
 }
 
+/**
+ * Construct a [RealmQueryBuilder] instance.
+ *
+ * Usage:
+ * ```
+ * val realmQueryBuilder = RealmQuery { where<Person>() }
+ * ```
+ */
 @Suppress("FunctionName")
 public fun <T : RealmModel> RealmQuery(
   builder: RealmQueryBuilder<T>
 ): RealmQueryBuilder<T> = builder
 
+/**
+ * Returns a [List] of [RealmModel] represented by `T` matching the [RealmQuery] produced by this
+ * builder.
+ *
+ * Usage:
+ * ```
+ * val persons = RealmQuery { where<Person>() }.getAll()
+ * ```
+ */
 public fun <T : RealmModel> RealmQueryBuilder<T>.getAll(): List<T> {
   return RealmFunction { realm -> buildQuery(realm).findAll() }
 }
