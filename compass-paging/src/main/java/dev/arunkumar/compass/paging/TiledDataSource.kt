@@ -28,7 +28,6 @@ public abstract class TiledDataSource<T : Any> : PositionalDataSource<T>() {
 
   @SuppressLint("RestrictedApi") // For computeInitialLoadPosition, computeInitialLoadSize
   override fun loadInitial(
-
     params: LoadInitialParams,
     callback: LoadInitialCallback<T>
   ) {

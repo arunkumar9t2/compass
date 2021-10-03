@@ -63,13 +63,12 @@ public fun <T : RealmModel, R> RealmCopyTransform(): RealmModelTransform<T, R> {
 private typealias RealmDispatcherProvider = () -> RealmDispatcher
 
 /**
- * Returns a [Flow] of list of `R` generated using
- * [transform] on the [RealmModel] instances satisfying the current
- * [RealmQuery]. The flow emits new list of [RealmModel] instances
- * whenever [RealmQuery] results has a change. The returned items can be
- * safely passed around threads since they are unmanaged due to usage of
- * [RealmCopyTransform] which uses [Realm.copyFromRealm] to create non
- * managed instances.
+ * Returns a [Flow] of list of `R` generated using [transform] on the
+ * [RealmModel] instances satisfying the current [RealmQuery]. The
+ * flow emits new list of [RealmModel] instances whenever [RealmQuery]
+ * results has a change. The returned items can be safely passed around
+ * threads since they are unmanaged due to usage of [RealmCopyTransform]
+ * which uses [Realm.copyFromRealm] to create non managed instances.
  *
  * The [RealmQuery] is executed using a [Realm] obtained with
  * [DefaultRealm] and it stays active for the duration of the active
@@ -104,13 +103,13 @@ public fun <T : RealmModel> RealmQueryBuilder<T>.asFlow(
 )
 
 /**
- * Returns a [Flow] of list of `R` generated using
- * [transform] on the [RealmModel] instances satisfying the current
- * [RealmQuery]. The flow emits new list of [RealmModel] instances
- * whenever [RealmQuery] results has a change. The returned items can
- * be safely passed around threads since they are unmanaged as long
- * the [transform] does not return managed instances. For correct
- * implementation of [transform] see [RealmCopyTransform].
+ * Returns a [Flow] of list of `R` generated using [transform] on the
+ * [RealmModel] instances satisfying the current [RealmQuery]. The
+ * flow emits new list of [RealmModel] instances whenever [RealmQuery]
+ * results has a change. The returned items can be safely passed around
+ * threads since they are unmanaged as long the [transform] does not
+ * return managed instances. For correct implementation of [transform]
+ * see [RealmCopyTransform].
  *
  * The [RealmQuery] is executed using a [Realm] obtained with
  * [DefaultRealm] and it stays active for the duration of the active

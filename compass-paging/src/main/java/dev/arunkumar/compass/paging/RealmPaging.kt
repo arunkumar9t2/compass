@@ -36,6 +36,23 @@ public val DefaultPagingConfig: PagingConfig = PagingConfig(
   enablePlaceholders = false,
 )
 
+/**
+ * Returns `Flow<PagingData<T>` with results that match the
+ * [io.realm.RealmQuery] produced by the builder.
+ *
+ * Note: By default, the implementation copies the entire [RealmModel]
+ * object to memory using [RealmCopyTransform]. To read a subset of data
+ * per [RealmModel] consider using [asPagingItems] overload which tasks
+ * a [RealmModelTransform] function.
+ *
+ * The flow can be further transformed using
+ * [paging](https://developer.android.com/topic/libraries/architecture/paging/v3-transform)
+ * operators and cached using `flow.cachedIn(viewModelScope)` in Android
+ * `ViewModel`.
+ *
+ * @see [Display Paged
+ *     Data](https://developer.android.com/topic/libraries/architecture/paging/v3-paged-data#display-paged-data)
+ */
 public fun <T : RealmModel> RealmQueryBuilder<T>.asPagingItems(
   tag: String = "PagingItemsExecutor",
   pagingConfig: PagingConfig = DefaultPagingConfig
@@ -43,14 +60,32 @@ public fun <T : RealmModel> RealmQueryBuilder<T>.asPagingItems(
   return asPagingItems(
     tag = tag,
     pagingConfig = pagingConfig,
-    realmModelTransform = RealmCopyTransform()
+    transform = RealmCopyTransform()
   )
 }
 
+/**
+ * Returns `Flow<PagingData<T>` with results that match the
+ * [io.realm.RealmQuery] produced by the builder.
+ *
+ * The flow can be further transformed using
+ * [paging](https://developer.android.com/topic/libraries/architecture/paging/v3-transform)
+ * operators and cached using `flow.cachedIn(viewModelScope)` in
+ * Android `ViewModel`. Note: Thread safety depends on the [transform]
+ * function implementation. Typically the implementation should return
+ * unmanaged objects that can be safely passed around threads. For a
+ * reference implementation see [RealmCopyTransform]. As a good practice
+ * only read the relevant properties from [RealmModel] to reduce the
+ * amount of objects load into application memory. If managed objects
+ * are returned for any reason, no thread safety is guaranteed.
+ *
+ * @see [Display Paged
+ *     Data](https://developer.android.com/topic/libraries/architecture/paging/v3-paged-data#display-paged-data)
+ */
 public fun <T : RealmModel, R : Any> RealmQueryBuilder<T>.asPagingItems(
   tag: String = "PagingItemsExecutor",
   pagingConfig: PagingConfig = DefaultPagingConfig,
-  realmModelTransform: RealmModelTransform<T, R>
+  transform: RealmModelTransform<T, R>
 ): Flow<PagingData<R>> {
   val realmQueryBuilder = this
   return flow {
@@ -58,7 +93,7 @@ public fun <T : RealmModel, R : Any> RealmQueryBuilder<T>.asPagingItems(
   }.flatMapConcat { dispatcher ->
     val factory = RealmTiledDataSource.Factory(
       realmQueryBuilder,
-      realmModelTransform
+      transform
     )
     val pagingSourceFactory = factory.asPagingSourceFactory(dispatcher)
     Pager(

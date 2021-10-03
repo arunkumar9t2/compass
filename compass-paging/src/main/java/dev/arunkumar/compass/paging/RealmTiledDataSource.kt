@@ -24,6 +24,42 @@ import dev.arunkumar.compass.RealmQueryBuilder
 import io.realm.RealmModel
 import io.realm.RealmResults
 
+/**
+ * Paging [DataSource] implementation that uses [RealmQuery] produced
+ * by [realmQueryBuilder] to fetch matching results and [transform] to
+ * transform the source [RealmModel] to any custom type represented by
+ * `R`.
+ *
+ * Implementation notes: The data source relies on [TiledDataSource]
+ * callbacks [TiledDataSource.loadRange] to load [RealmResults]
+ * produced by the query at any position. In order to confirm to
+ * [Realm]'s threading model, [RealmDispatcher] is expected to be
+ * used when converting this [DataSource] to Paging 3 factory using
+ * [DataSource.Factory.asPagingSourceFactory]. Thread safety/stability
+ * is not guaranteed when any other dispatcher is passed.
+ *
+ * [loadRange] is called on the provided Dispatcher thread and
+ * [RealmResults] are immediately cached. Further load range requests
+ * simply copy the results from previously fetched [RealmResults].
+ * Changes are observed on the [RealmResults] and upon any change,
+ * the data source is invalidated to force initial loading on
+ * [RealmResults].
+ *
+ * Thread safety for further transformation of fetched [RealmResults]
+ * is guaranteed only when provided [transform] return non-managed
+ * instances. For sample implementation see [RealmCopyTransform]
+ *
+ * For a safe default, consider using [asPagingItems] which manages
+ * dispatcher lifecyle and transforms
+ *
+ * @see asPagingItems
+ * @param realmQueryBuilder The builder function that will be used to
+ *     construct [RealmQuery] instanced. Will be called on loading thread.
+ * @param transform The transformation function that will be used to map
+ *     live managed [RealmModel] instances to type `R`. The `R` should
+ *     be unmanaged [RealmModel] objects or custom types. If managed
+ *     instances are returned, then thread safety is not guaranteed.
+ */
 public class RealmTiledDataSource<T : RealmModel, R : Any> internal constructor(
   private val realmQueryBuilder: RealmQueryBuilder<T>,
   private val transform: RealmModelTransform<T, R>
@@ -39,6 +75,18 @@ public class RealmTiledDataSource<T : RealmModel, R : Any> internal constructor(
     )
   }
 
+  /**
+   * [DataSource.Factory] implementation to construct
+   * [RealmTiledDataSource]
+   *
+   * @param realmQueryBuilder The builder function that will be used to
+   *     construct [RealmQuery] instance. Will be called on loading thread.
+   * @param transform The transformation function that will be used to
+   *     map live managed [RealmModel] instances to type
+   *     `R`. The `R` should be unmanaged [RealmModel]
+   *     objects or custom types. If managed instances are
+   *     returned, then thread safety is not guaranteed.
+   */
   public class Factory<T : RealmModel, R : Any>(
     private val realmQueryBuilder: RealmQueryBuilder<T>,
     private val transform: RealmModelTransform<T, R>

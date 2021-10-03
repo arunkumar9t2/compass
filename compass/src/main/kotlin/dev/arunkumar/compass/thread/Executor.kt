@@ -24,21 +24,26 @@ import io.realm.Realm
 import java.util.concurrent.Executor
 
 /**
- * An [Executor] that can be safely released by calling [AutoCloseable.close] method.
+ * An [Executor] that can be safely released by calling
+ * [AutoCloseable.close] method.
  */
 public interface CloseableExecutor : Executor, AutoCloseable
 
 /**
- * [HandlerExecutor] internally manages a [HandlerThread] instance that will be used to execute
- * incoming tasks in [Executor.execute]. [HandlerExecutor]s are useful in places where an active
- * [Looper] is required on the created [Thread].
- * The [HandlerThread] is assigned [Process.THREAD_PRIORITY_BACKGROUND] and should be only used to
+ * [HandlerExecutor] internally manages a [HandlerThread] instance
+ * that will be used to execute incoming tasks in [Executor.execute].
+ * [HandlerExecutor]s are useful in places where an active [Looper] is
+ * required on the created [Thread]. The [HandlerThread] is assigned
+ * [Process.THREAD_PRIORITY_BACKGROUND] and should be only used to
  * execute tasks with low priority.
  *
- * Notes: The [HandlerExecutor]'s internal [HandlerThread] event loop is stopped when [close] is called.
+ * Notes: The [HandlerExecutor]'s internal [HandlerThread] event loop is
+ * stopped when [close] is called.
+ *
  *        As a good practice, always `close` the executor when it is no longer required.
  *
- * @param tag The thread name of the handler thread that will be created.
+ * @param tag The thread name of the handler thread that will be
+ *     created.
  */
 public class HandlerExecutor(private val tag: String? = null) : CloseableExecutor {
 
@@ -52,9 +57,11 @@ public class HandlerExecutor(private val tag: String? = null) : CloseableExecuto
   private val handler by lazy { Handler(handlerThread.looper) }
 
   /**
-   * Executes the given [command] in an [HandlerThread] that is guranteed to have a [Looper] running
-   * actively. In case the calling thread is already the `HandlerThread` that this instance manages,
-   * then `command` is directly executed without going through a thread switch.
+   * Executes the given [command] in an [HandlerThread] that is
+   * guranteed to have a [Looper] running actively. In case the calling
+   * thread is already the `HandlerThread` that this instance manages,
+   * then `command` is directly executed without going through a thread
+   * switch.
    */
   override fun execute(command: Runnable) {
     if (Looper.myLooper() == handler.looper) {
@@ -65,8 +72,9 @@ public class HandlerExecutor(private val tag: String? = null) : CloseableExecuto
   }
 
   /**
-   * Releases any internal resources that are used by this executor. Always prefer to call this when
-   * [HandlerExecutor] is no longer required.
+   * Releases any internal resources that are used by this executor.
+   * Always prefer to call this when [HandlerExecutor] is no longer
+   * required.
    */
   override fun close() {
     handlerThread.quitSafely()
@@ -74,12 +82,15 @@ public class HandlerExecutor(private val tag: String? = null) : CloseableExecuto
 }
 
 /**
- * An [Executor] instance that executes given work in a thread that has the Android [Looper] running.
- * An work posted in [execute] can observe [Realm] objects due to presence of the Looper in the
- * execution thread. The internal `Thread` will have [Process.THREAD_PRIORITY_BACKGROUND], hence
- * it is recommended to use this executor for non critical work.
+ * An [Executor] that executes given work in a thread that has
+ * the Android [Looper] running. An work posted in [execute]
+ * can observe [Realm] objects due to presence of the Looper
+ * in the execution thread. The internal `Thread` will have
+ * [Process.THREAD_PRIORITY_BACKGROUND], hence it is recommended to use
+ * this executor for non critical work.
  *
- * @param tag The thread name of the handler thread that will be created.
+ * @param tag The thread name of the handler thread that will be
+ *     created.
  */
 public class RealmExecutor(
   private val tag: String? = null
