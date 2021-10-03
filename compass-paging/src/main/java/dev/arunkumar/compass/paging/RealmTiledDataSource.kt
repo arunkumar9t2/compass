@@ -46,8 +46,8 @@ import io.realm.RealmResults
  * [RealmResults].
  *
  * Thread safety for further transformation of fetched [RealmResults]
- * is guaranteed only when provided [transform] return non-managed
- * instances. For sample implementation see [RealmCopyTransform]
+ * is guaranteed only when provided [transform] returns non-managed
+ * instances. For sample implementation, see [RealmCopyTransform]
  *
  * For a safe default, consider using [asPagingItems] which manages
  * dispatcher lifecyle and transforms
