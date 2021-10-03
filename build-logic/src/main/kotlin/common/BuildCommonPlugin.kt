@@ -25,6 +25,7 @@ import kotlinx.validation.ApiValidationExtension
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.configure
+import org.jetbrains.dokka.gradle.DokkaPlugin
 
 /**
  * Common build plugin that should be applied to root `build.gradle` file. This plugin can be used
@@ -50,12 +51,18 @@ public class BuildCommonPlugin : ConfigurablePlugin({
     error("build-common should be only applied to root project")
   }
 
+  configureDokka()
+
   configureApiValidation()
 
   subprojects {
     configureSpotless()
   }
 })
+
+private fun Project.configureDokka() {
+  apply<DokkaPlugin>()
+}
 
 private fun Project.configureApiValidation() {
   // Configure API checks
