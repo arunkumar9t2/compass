@@ -41,7 +41,7 @@ public class TasksActivity : ComponentActivity() {
           val viewModel = viewModel<TasksViewModel>()
           val state by rememberFlowWithLifecycle(flow = viewModel.state)
             .collectAsState(initial = viewModel.state.value)
-          Compass(state, viewModel)
+          Tasks(state, viewModel)
         }
       }
     }
