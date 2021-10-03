@@ -18,6 +18,17 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.x'
+
+      - uses: burrunan/gradle-cache-action@v1
+        name: build-documentation
+        with:
+          debug: false
+          job-id: build-documentation
+          read-only: ${{ github.ref != 'refs/heads/main' }}
+          gradle-dependencies-cache-key: |
+            gradle/libs.versions.toml
+            build-logic/**/Constants.kt
+          arguments: copyDocs --scan
       - name: Publish documentation
         run: |
           pip install ghp-import
