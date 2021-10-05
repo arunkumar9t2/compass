@@ -49,7 +49,7 @@ dependencies {
 
 ### Query construction
 
-`Compass` provides [RealmQuery](https://arunkumar9t2.github.io/compass/compass/dev.arunkumar.compass/-realm-query.html) construction function to build `RealmQuery` instances. The construction function returns `RealmQueryBuilder<T>` which is a typealias for `Realm.() -> RealmQuery<T>`. Through use of lambdas, compass overcomes threading limitations by deferring invocation to usage site rather than call site.
+`Compass` provides [RealmQuery](https://arunkumar9t2.github.io/compass/compass/dev.arunkumar.compass/-realm-query.html) construction function to build `RealmQuery` instances. Through use of lambdas, `RealmQuery{}` overcomes threading limitations by deferring invocation to usage site rather than call site.
 
 ```kotlin
 val personQueryBuilder =  RealmQuery { where<Person>().sort(Person.NAME) }
@@ -93,11 +93,21 @@ Note that `RealmDispatcher` should be closed when no longer used to release reso
 
 #### Streams via Flow
 
-Compass provides extensions to convert a `RealmQueryBuilder` to `Flow<T>` and confirms to basic threading expectations of a `Flow`
+Compass provides extensions for easy conversions of queries to `Flow` and confirms to basic threading expectations of a `Flow`
 * Returned objects can be passed to different threads
 * Handles `Realm` lifecycle until `Flow` collection is stopped.
 
 ```kotlin
 val personsFlow = RealmQuery { where<Person>() }.asFlow()
 ```
-Internally `asFlow` creates a dedicated `RealmDispatcher` to run the queries and observe changes. The created dispatcher is automatically closed and recreated when collection stops/restarted.
+Internally `asFlow` creates a dedicated `RealmDispatcher` to run the queries and observe changes. The created dispatcher is automatically closed and recreated when collection stops/restarted. By default, all `RealmResults` objects are copied using `Realm.copyFromRealm` 
+
+##### Read subset of data.
+
+Copying large objects from Realm can be expensive in terms of memory, to read only subset of results to memory use `asFlow()` overload that takes a `transform` function.
+
+```kotlin
+data class PersonName(val name: String)
+
+val personNames = RealmQuery { where<Person>() }.asFlow { PersonName(it.name) }
+```
