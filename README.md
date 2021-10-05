@@ -47,6 +47,8 @@ dependencies {
 ```
 ## Features
 
+Compass assumes `Realm.init(this)` and `Realm.setDefaultConfiguration(config)` is called already and acquires a default instance of `Realm` using `Realm.getDefaultInstance()` where needed.
+
 ### Query construction
 
 `Compass` provides [RealmQuery](https://arunkumar9t2.github.io/compass/compass/dev.arunkumar.compass/-realm-query.html) construction function to build `RealmQuery` instances. Through use of lambdas, `RealmQuery{}` overcomes threading limitations by deferring invocation to usage site rather than call site.
