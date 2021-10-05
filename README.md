@@ -31,7 +31,6 @@ Or in `dependenciesResolutionManagement` when using `Settings` API in `settings.
 ```groovy
 dependencyResolutionManagement {
   repositories {
-    google()
     mavenCentral()
   }
 }
@@ -48,9 +47,18 @@ dependencies {
 ```
 ## Features
 
+### Query construction
+
+`Compass` provides [RealmQuery](https://arunkumar9t2.github.io/compass/compass/dev.arunkumar.compass/-realm-query.html) construction function to build `RealmQuery` instances. The construction function returns `RealmQueryBuilder<T>` which is a typealias for `Realm.() -> RealmQuery<T>`. Through use of lambdas, compass overcomes threading limitations by deferring invocation to usage site rather than call site.
+
+```kotlin
+val personQueryBuilder =  RealmQuery { where<Person>().sort(Person.NAME) }
+```
+Extensions like [getAll()](https://arunkumar9t2.github.io/compass/compass/dev.arunkumar.compass/get-all.html) is provided on `RealmQueryBuilder` that takes advantage of this pattern.
+
 ### Threading
 
-`Realm`'s live [updating object](https://docs.mongodb.com/realm/sdk/android/fundamentals/live-queries/#auto-refresh) model mandates few threading rules that should be followed failing which would result in an exception. Those rules are:
+`Realm`'s live [updating object](https://docs.mongodb.com/realm/sdk/android/fundamentals/live-queries/#auto-refresh) model mandates few threading rules. Those rules are:
 
 1. `Realm`s can be accessed only from the thread they were originally created
 2. `Realm`s can be observed only from threads which have [Android](https://developer.android.com/reference/android/os/Looper)'s Looper [prepared](https://developer.android.com/reference/android/os/Looper#prepare()) on them.
@@ -66,6 +74,7 @@ dependencies {
 withContext(RealmDispatcher()) {
     Realm { realm -> // Acquire default Realm with `Realm {}`
         val persons = realm.where<Person>().findAll()
+
         val realmChangeListener = RealmChangeListener<RealmResults<Person>> {
             println("Change liseneter called")
         }
@@ -76,7 +85,19 @@ withContext(RealmDispatcher()) {
             copyToRealm(Person())
         }
         
-        delay(500)  // Wait till change listener triggered
-    }
+        delay(500)  // Wait till change listener is triggered
+    } // Acquired Realm automatically closed
 }
 ```
+Note that `RealmDispatcher` should be closed when no longer used to release resources. For automatic lifecycle handling via [Flow](https://kotlinlang.org/docs/flow.html), see below.
+
+#### Streams via Flow
+
+Compass provides extensions to convert a `RealmQueryBuilder` to `Flow<T>` and confirms to basic threading expectations of a `Flow`
+* Returned objects can be passed to different threads
+* Handles `Realm` lifecycle until `Flow` collection is stopped.
+
+```kotlin
+val personsFlow = RealmQuery { where<Person>() }.asFlow()
+```
+Internally `asFlow` creates a dedicated `RealmDispatcher` to run the queries and observe changes. The created dispatcher is automatically closed and recreated when collection stops/restarted.
