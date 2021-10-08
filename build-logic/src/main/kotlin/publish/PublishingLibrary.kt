@@ -66,12 +66,12 @@ public class PublishingLibrary : ConfigurablePlugin({
           pom {
             name.set(project.name)
             description.set(project.description)
-            url.set(findProject("website").toString())
+            url.set(findProperty("website").toString())
 
             licenses {
               license {
                 name.set("Apache License, Version 2.0")
-                url.set("https://github.com/arunkumar9t2/base-android/blob/master/LICENSE")
+                url.set("https://github.com/arunkumar9t2/compass/blob/main/LICENSE")
               }
             }
 
