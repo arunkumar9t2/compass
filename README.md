@@ -11,12 +11,12 @@
 `Compass` is designed to make working with [Realm](https://realm.io) easier through collection of Kotlin types and extensions that handle `Realm`'s lifecycle and threading model effectively. It has two major components
 
 * `compass` - The core Kotlin API with set of extensions for common patterns around `Realm`'s lifecycle and threading.
-* `compas-paging` - Provides extensions to integrate with [Jetpack Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview).
-* _more coming soon.._
+* `compass-paging` - Provides extensions to integrate with [Jetpack Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview).
+* _more coming soon..™_
 
 ## Getting Started
 
-`Compass` is available as android library artifacts on `mavenCentral`. Ensure `mavenCentral` is added to root `build.gradle` file as shown:
+`Compass` is available as android library artifacts on `mavenCentral`. In root `build.gradle`:
 
 ```groovy
 allprojects {
@@ -26,7 +26,7 @@ allprojects {
 }
 ```
 
-Or in `dependenciesResolutionManagement` when using `Settings` API in `settings.gradle`:
+Or in `dependenciesResolutionManagement` in `settings.gradle`:
 
 ```groovy
 dependencyResolutionManagement {
@@ -45,9 +45,11 @@ dependencies {
     implementation "dev.arunkumar.compass:compass-paging:1.0.0"
 }
 ```
-## Features
+## Setup
 
 Compass assumes `Realm.init(this)` and `Realm.setDefaultConfiguration(config)` is called already and acquires a default instance of `Realm` using `Realm.getDefaultInstance()` where needed.
+
+## Features
 
 ### Query construction
 
@@ -63,8 +65,8 @@ Extensions like [getAll()](https://arunkumar9t2.github.io/compass/compass/dev.ar
 `Realm`'s live [updating object](https://docs.mongodb.com/realm/sdk/android/fundamentals/live-queries/#auto-refresh) model mandates few threading rules. Those rules are:
 
 1. `Realm`s can be accessed only from the thread they were originally created
-2. `Realm`s can be observed only from threads which have [Android](https://developer.android.com/reference/android/os/Looper)'s Looper [prepared](https://developer.android.com/reference/android/os/Looper#prepare()) on them.
-3. `RealmResults` also can't be passed around the threads.
+2. `Realm`s can be observed only from threads which have Android's [Looper](https://developer.android.com/reference/android/os/Looper) [prepared](https://developer.android.com/reference/android/os/Looper#prepare()) on them.
+3. Managed `RealmResults` can't be passed around the threads.
 
 `Compass` tries to make it easier to work with Realm by providing safe defaults.
 
@@ -96,7 +98,7 @@ Note that `RealmDispatcher` should be closed when no longer used to release reso
 #### Streams via Flow
 
 Compass provides extensions for easy conversions of queries to `Flow` and confirms to basic threading expectations of a `Flow`
-* Returned objects can be passed to different threads
+* Returned objects can be passed to different threads.
 * Handles `Realm` lifecycle until `Flow` collection is stopped.
 
 ```kotlin
@@ -106,10 +108,24 @@ Internally `asFlow` creates a dedicated `RealmDispatcher` to run the queries and
 
 ##### Read subset of data.
 
-Copying large objects from Realm can be expensive in terms of memory, to read only subset of results to memory use `asFlow()` overload that takes a `transform` function.
+Copying large objects from Realm can be expensive in terms of memory, to read only subset of results to memory use `asFlow()` overload that takes a [transform](https://arunkumar9t2.github.io/compass/compass/dev.arunkumar.compass/index.html#-1272439111/Classlikes/1670650899) function.
 
 ```kotlin
 data class PersonName(val name: String)
 
 val personNames = RealmQuery { where<Person>() }.asFlow { PersonName(it.name) }
 ```
+
+## FAQ
+
+#### Why not Realm Freeze?
+
+[Frozen](https://docs.mongodb.com/realm/sdk/android/advanced-guides/threading/#frozen-objects) Realm objects is the official way to safely move objects around threads. However it still says connected to udnerlying `Realm` and poses risk around threading.
+
+> Frozen objects remain valid for as long as the realm that spawned them stays open. Avoid closing realms that contain frozen objects until all threads are done working with those frozen objects.
+
+`Compass`'s [transform](https://arunkumar9t2.github.io/compass/compass/dev.arunkumar.compass/index.html#-1272439111/Classlikes/1670650899) API supports both creating detached objects from `Realm` and reading subset of `Realm` object into memory.
+
+## Resources
+
+TBA
