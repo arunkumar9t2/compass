@@ -53,7 +53,7 @@ Compass assumes `Realm.init(this)` and `Realm.setDefaultConfiguration(config)` i
 
 ### Query construction
 
-`Compass` provides [RealmQuery](https://arunkumar9t2.github.io/compass/compass/dev.arunkumar.compass/-realm-query.html) construction function to build `RealmQuery` instances. Through use of lambdas, `RealmQuery{}` overcomes threading limitations by deferring invocation to usage site rather than call site.
+Use [RealmQuery](https://arunkumar9t2.github.io/compass/compass/dev.arunkumar.compass/-realm-query.html) construction function to build `RealmQuery` instances. Through use of lambdas, `RealmQuery{}` overcomes threading limitations by deferring invocation to usage site rather than call site.
 
 ```kotlin
 val personQueryBuilder =  RealmQuery { where<Person>().sort(Person.NAME) }
@@ -97,14 +97,14 @@ Note that `RealmDispatcher` should be closed when no longer used to release reso
 
 #### Streams via Flow
 
-Compass provides extensions for easy conversions of queries to `Flow` and confirms to basic threading expectations of a `Flow`
+`Compass` provides extensions for easy conversions of queries to `Flow` and confirms to basic threading expectations of a `Flow`
 * Returned objects can be passed to different threads.
 * Handles `Realm` lifecycle until `Flow` collection is stopped.
 
 ```kotlin
 val personsFlow = RealmQuery { where<Person>() }.asFlow()
 ```
-Internally `asFlow` creates a dedicated `RealmDispatcher` to run the queries and observe changes. The created dispatcher is automatically closed and recreated when collection stops/restarted. By default, all `RealmResults` objects are copied using `Realm.copyFromRealm` 
+Internally `asFlow` creates a dedicated `RealmDispatcher` to run the queries and observe changes. The created dispatcher is automatically closed and recreated when collection stops/restarted. By default, all `RealmResults` objects are copied using `Realm.copyFromRealm`.
 
 ##### Read subset of data.
 
