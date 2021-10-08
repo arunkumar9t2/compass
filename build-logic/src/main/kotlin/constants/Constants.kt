@@ -39,4 +39,4 @@ public const val ANDROID_DEBUG_VARIANT: String = "debug"
 public const val ANDROID_VERSION_CODE: Int = 1
 public const val ANDROID_VERSION_NAME: String = "1.0"
 
-public const val COMPASS_RELEASE_VERSION: String = "0.1.0"
+public const val COMPASS_RELEASE_VERSION: String = "1.0.0"
