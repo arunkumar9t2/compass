@@ -133,4 +133,4 @@ jobs:
           gradle-dependencies-cache-key: |
             gradle/libs.versions.toml
             build-logic/**/Constants.kt
-          arguments: help -Psnapshot --rerun-tasks
+          arguments: publishReleasePublicationToSonatypeRepository --rerun-tasks
