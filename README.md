@@ -2,8 +2,11 @@
 
 <p align="center">
 <b>Kotlin API and tools to make working with Realm easier</b>
+</p>
 
+<p align="center"> 
 <a href="https://github.com/arunkumar9t2/compass/actions/workflows/ci.yml"><img src="https://img.shields.io/github/workflow/status/arunkumar9t2/compass/CI?logo=GitHub&style=flat-square"/></a>
+<a href="https://arunkumar9t2.github.io/compass/"><img src="https://img.shields.io/badge/Website-%20-lightgrey.svg?color=0F8842&colorA=0F8842&style=flat-square&logo=github"/></a>
 </p>
 
 ## Components
