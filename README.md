@@ -119,6 +119,52 @@ data class PersonName(val name: String)
 val personNames = RealmQuery { where<Person>() }.asFlow { PersonName(it.name) }
 ```
 
+#### Paging
+
+`Compass` provides extensions on `RealmQueryBuilder` to enable paging support. For example:
+
+```kotlin
+val pagedPersons = RealmQuery { where<Person>() }.asPagingItems()
+```
+
+`asPagingItems` internally manages a `Realm` instance, run queries using `RealmDispatcher` and cleans up resources when `Flow` collection is stopped.
+
+For reading only subset of objects into memory, use the `asPagingItems()` overload with a `transform` function:
+
+```kotlin
+val pagedPersonNames = RealmQuery { where<Person>() }.asPagingItems { it.name }
+```
+
+##### ViewModel
+
+For integration with ViewModel
+
+
+```kotlin
+class MyViewModel: ViewModel() {
+
+    val results = RealmQuery { where<Task>() }.asPagingItems().cachedIn(viewModelScope)
+}
+```
+
+The `Flow` returned by `asPagingItems()` can be safely used for [transformations](https://developer.android.com/topic/libraries/architecture/paging/v3-transform#transform-data-stream), [seperators](https://developer.android.com/topic/libraries/architecture/paging/v3-transform#handle-separators-ui) and [caching](https://developer.android.com/topic/libraries/architecture/paging/v3-transform#avoid-duplicate). Although supported, for [converting to UI model](https://developer.android.com/topic/libraries/architecture/paging/v3-transform#convert-ui-model) prefer using `asPagingItems { /* convert */ }` as it is more efficient.
+
+##### Compose
+
+The `Flow<PagingData<T>>` produced by `asPagingItems()` can be consumed by `Compose` with `collectAsLazyPagingItems()` from `paging-compose`:
+
+```kotlin
+val items = tasks.collectAsLazyPagingItems()
+  LazyColumn(
+    modifier = modifier.padding(contentPadding),
+  ) {
+    items(
+      items = items,
+      key = { task -> task.id.toString() }
+    ) { task -> taskContent(task) }
+  }
+```
+
 ## FAQ
 
 #### Why not Realm Freeze?
