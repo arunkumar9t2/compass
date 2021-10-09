@@ -175,6 +175,8 @@ val items = tasks.collectAsLazyPagingItems()
 
 `Compass`'s [transform](https://arunkumar9t2.github.io/compass/compass/dev.arunkumar.compass/index.html#-1272439111/Classlikes/1670650899) API supports both creating detached objects from `Realm` and reading subset of `Realm` object into memory.
 
+For detailed comparison, see [here](https://arunkumar.dev/introducing-compass-effective-paging-with-realm-and-jetpack-paging-3/#comparison-to-official-apis).
+
 ## Resources
 
 * [Introducing Compass: Effective Paging with Realm and Jetpack Paging 3](https://arunkumar.dev/introducing-compass-effective-paging-with-realm-and-jetpack-paging-3/)
