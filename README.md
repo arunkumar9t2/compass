@@ -177,4 +177,4 @@ val items = tasks.collectAsLazyPagingItems()
 
 ## Resources
 
-TBA
+* [Introducing Compass: Effective Paging with Realm and Jetpack Paging 3](https://arunkumar.dev/introducing-compass-effective-paging-with-realm-and-jetpack-paging-3/)
