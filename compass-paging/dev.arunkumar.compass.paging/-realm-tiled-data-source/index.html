@@ -1,0 +1,220 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>RealmTiledDataSource</title>
+</head><body><link href="../../../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script><script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script><link href="../../../styles/style.css" rel="Stylesheet"><link href="../../../styles/logo-styles.css" rel="Stylesheet"><link href="../../../styles/jetbrains-mono.css" rel="Stylesheet"><link href="../../../styles/main.css" rel="Stylesheet"><script type="text/javascript" src="../../../scripts/clipboard.js" async></script><script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script><script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script><script type="text/javascript" src="../../../scripts/main.js" async></script>
+  
+    <div id="container">
+      <div id="leftColumn"><a href="../../../index.html">
+            <div id="logo"></div>
+          </a>
+        <div id="paneSearch"></div>
+        <div id="sideMenu"></div>
+      </div>
+      <div id="main">
+        <script type="text/javascript" src="../../../scripts/main.js"></script><div id="leftToggler"><span class="icon-toggler"></span></div>
+
+        <div class="main-content" id="content" pageids="compass-paging::dev.arunkumar.compass.paging/RealmTiledDataSource///PointingToDeclaration//-1218846324">
+          <div class="navigation-wrapper" id="navigation-wrapper">
+            <div class="breadcrumbs"><a href="../../index.html">compass-paging</a>/<a href="../index.html">dev.arunkumar.compass.paging</a>/<a href="index.html">RealmTiledDataSource</a></div>
+            <div class="pull-right d-flex">
+              <div id="searchBar"></div>
+            </div>
+          </div>
+          <div class="cover ">
+            <h1 class="cover"><span>Realm</span><wbr><span>Tiled</span><wbr><span>Data</span><wbr><span>Source</span></h1>
+            <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":compass-paging:dokkaHtmlPartial/release"><div class="symbol monospace">class <a href="index.html">RealmTiledDataSource</a>&lt;<a href="index.html">T</a> : <span data-unresolved-link="io.realm/RealmModel///PointingToDeclaration/">RealmModel</span>, <a href="index.html">R</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; : <a href="../-tiled-data-source/index.html">TiledDataSource</a>&lt;<a href="index.html">R</a>&gt; <span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">Paging <a href="https://developer.android.com/reference/kotlin/androidx/paging/DataSource.html">DataSource</a> implementation that uses RealmQuery produced by <a href="../../../compass-paging/dev.arunkumar.compass.paging/-realm-tiled-data-source/realm-query-builder.html">realmQueryBuilder</a> to fetch matching results and <a href="../../../compass-paging/dev.arunkumar.compass.paging/-realm-tiled-data-source/transform.html">transform</a> to transform the source <span data-unresolved-link="io.realm/RealmModel///PointingToDeclaration/">RealmModel</span> to any custom type represented by <code>R</code>.</p><p class="paragraph">Implementation notes: The data source relies on <a href="../-tiled-data-source/index.html">TiledDataSource</a> callbacks <a href="../-tiled-data-source/load-range.html">TiledDataSource.loadRange</a> to load <span data-unresolved-link="io.realm/RealmResults///PointingToDeclaration/">RealmResults</span> produced by the query at any position. In order to confirm to Realm's threading model, RealmDispatcher is expected to be used when converting this <a href="https://developer.android.com/reference/kotlin/androidx/paging/DataSource.html">DataSource</a> to Paging 3 factory using <a href="-factory/index.html#-2146727527%2FFunctions%2F-1218846324">DataSource.Factory.asPagingSourceFactory</a>. Thread safety/stability is not guaranteed when any other dispatcher is passed.</p><p class="paragraph"><a href="load-range.html">loadRange</a> is called on the provided Dispatcher thread and <span data-unresolved-link="io.realm/RealmResults///PointingToDeclaration/">RealmResults</span> are immediately cached. Further load range requests simply copy the results from previously fetched <span data-unresolved-link="io.realm/RealmResults///PointingToDeclaration/">RealmResults</span>. Changes are observed on the <span data-unresolved-link="io.realm/RealmResults///PointingToDeclaration/">RealmResults</span> and upon any change, the data source is invalidated to force initial loading on <span data-unresolved-link="io.realm/RealmResults///PointingToDeclaration/">RealmResults</span>.</p><p class="paragraph">Thread safety for further transformation of fetched <span data-unresolved-link="io.realm/RealmResults///PointingToDeclaration/">RealmResults</span> is guaranteed only when provided <a href="../../../compass-paging/dev.arunkumar.compass.paging/-realm-tiled-data-source/transform.html">transform</a> returns non-managed instances. For sample implementation, see <a href="../../../compass/dev.arunkumar.compass/index.html">RealmCopyTransform</a></p><p class="paragraph">For a safe default, consider using <a href="../as-paging-items.html">asPagingItems</a> which manages dispatcher lifecyle and transforms</p></div></div>
+          </div>
+          <div class="tabbedcontent">
+            <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button><button class="section-tab" data-togglable="Parameters">Parameters</button><button class="section-tab" data-togglable="See also">See also</button></div>
+            <div class="tabs-section-body">
+              <h2 class="">See also</h2>
+              <div data-togglable="See also">
+                <div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="See also"><div class="content sourceset-depenent-content" data-active="" data-togglable=":compass-paging:dokkaHtmlPartial/release"><div data-togglable="See also"><div class="table" data-togglable="See also"><div class="table-row" data-filterable-current=":compass-paging:dokkaHtmlPartial/release" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"><div class="main-subrow keyValue WithExtraAttributes RowTitle"><div class=""><span class="inline-flex"><a href="../as-paging-items.html">asPagingItems</a></span><span class="inline-flex"><div data-togglable="See also"></div></span></div><div></div></div></div></div></div></div></div>
+              </div>
+              <h2 class="">Parameters</h2>
+              <div data-togglable="Parameters">
+                <div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-depenent-content" data-active="" data-togglable=":compass-paging:dokkaHtmlPartial/release"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":compass-paging:dokkaHtmlPartial/release" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">realmQueryBuilder</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The builder function that will be used to     construct RealmQuery instanced. Will be called on loading thread.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":compass-paging:dokkaHtmlPartial/release" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex">transform</span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The transformation function that will be used to map     live managed <span data-unresolved-link="io.realm/RealmModel///PointingToDeclaration/">RealmModel</span> instances to type <code>R</code>. The <code>R</code> should     be unmanaged <span data-unresolved-link="io.realm/RealmModel///PointingToDeclaration/">RealmModel</span> objects or custom types. If managed     instances are returned, then thread safety is not guaranteed.</p></div></div></div></div></div></div></div></div></div>
+              </div>
+              <h2 class="">Types</h2>
+              <div class="table" data-togglable="Types"><a data-name="-1150273473%2FClasslikes%2F-1218846324" anchor-label="Factory" id="-1150273473%2FClasslikes%2F-1218846324" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":compass-paging:dokkaHtmlPartial/release" data-filterable-set=":compass-paging:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="-factory/index.html">Factory</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1150273473%2FClasslikes%2F-1218846324"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":compass-paging:dokkaHtmlPartial/release" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":compass-paging:dokkaHtmlPartial/release"><div class="symbol monospace">class <a href="-factory/index.html">Factory</a>&lt;<a href="-factory/index.html">T</a> : <span data-unresolved-link="io.realm/RealmModel///PointingToDeclaration/">RealmModel</span>, <a href="-factory/index.html">R</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt;(realmQueryBuilder: <a href="../../../compass/dev.arunkumar.compass/-realm-query-builder/index.html">RealmQueryBuilder</a>&lt;<a href="-factory/index.html">T</a>&gt;, transform: <a href="../../../compass/dev.arunkumar.compass/-realm-model-transform/index.html">RealmModelTransform</a>&lt;<a href="-factory/index.html">T</a>, <a href="-factory/index.html">R</a>&gt;) : <a href="https://developer.android.com/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, <a href="-factory/index.html">R</a>&gt; <span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+<a data-name="-1150273473%2FClasslikes%2F-1218846324" anchor-label="Factory" id="-1150273473%2FClasslikes%2F-1218846324" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"></a><div class="brief "><a data-name="-1150273473%2FClasslikes%2F-1218846324" anchor-label="Factory" id="-1150273473%2FClasslikes%2F-1218846324" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"></a><a href="https://developer.android.com/reference/kotlin/androidx/paging/DataSource.Factory.html">DataSource.Factory</a> implementation to construct <a href="index.html">RealmTiledDataSource</a></div></div>
+</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="">Functions</h2>
+              <div class="table" data-togglable="Functions"><a data-name="368055330%2FFunctions%2F-1218846324" anchor-label="addInvalidatedCallback" id="368055330%2FFunctions%2F-1218846324" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":compass-paging:dokkaHtmlPartial/release" data-filterable-set=":compass-paging:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="../-tiled-data-source/index.html#368055330%2FFunctions%2F-1218846324">addInvalidatedCallback</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="368055330%2FFunctions%2F-1218846324"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":compass-paging:dokkaHtmlPartial/release" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":compass-paging:dokkaHtmlPartial/release"><div class="symbol monospace">open fun <a href="../-tiled-data-source/index.html#368055330%2FFunctions%2F-1218846324">addInvalidatedCallback</a>(onInvalidatedCallback: <a href="https://developer.android.com/reference/kotlin/androidx/paging/DataSource.InvalidatedCallback.html">DataSource.InvalidatedCallback</a>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="-327574893%2FFunctions%2F-1218846324" anchor-label="countItems" id="-327574893%2FFunctions%2F-1218846324" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":compass-paging:dokkaHtmlPartial/release" data-filterable-set=":compass-paging:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="count-items.html">countItems</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-327574893%2FFunctions%2F-1218846324"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":compass-paging:dokkaHtmlPartial/release" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":compass-paging:dokkaHtmlPartial/release"><div class="symbol monospace">open override fun <a href="count-items.html">countItems</a>(): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="1325232886%2FFunctions%2F-1218846324" anchor-label="invalidate" id="1325232886%2FFunctions%2F-1218846324" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":compass-paging:dokkaHtmlPartial/release" data-filterable-set=":compass-paging:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="../-tiled-data-source/index.html#1325232886%2FFunctions%2F-1218846324">invalidate</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1325232886%2FFunctions%2F-1218846324"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":compass-paging:dokkaHtmlPartial/release" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":compass-paging:dokkaHtmlPartial/release"><div class="symbol monospace">open fun <a href="../-tiled-data-source/index.html#1325232886%2FFunctions%2F-1218846324">invalidate</a>()<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="456734388%2FFunctions%2F-1218846324" anchor-label="loadInitial" id="456734388%2FFunctions%2F-1218846324" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":compass-paging:dokkaHtmlPartial/release" data-filterable-set=":compass-paging:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="../-tiled-data-source/load-initial.html">loadInitial</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="456734388%2FFunctions%2F-1218846324"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":compass-paging:dokkaHtmlPartial/release" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":compass-paging:dokkaHtmlPartial/release"><div class="symbol monospace">open override fun <a href="../-tiled-data-source/load-initial.html">loadInitial</a>(params: <a href="https://developer.android.com/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialParams.html">PositionalDataSource.LoadInitialParams</a>, callback: <a href="https://developer.android.com/reference/kotlin/androidx/paging/PositionalDataSource.LoadInitialCallback.html">PositionalDataSource.LoadInitialCallback</a>&lt;<a href="index.html">R</a>&gt;)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="-841171071%2FFunctions%2F-1218846324" anchor-label="loadRange" id="-841171071%2FFunctions%2F-1218846324" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":compass-paging:dokkaHtmlPartial/release" data-filterable-set=":compass-paging:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="load-range.html">loadRange</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-841171071%2FFunctions%2F-1218846324"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":compass-paging:dokkaHtmlPartial/release" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":compass-paging:dokkaHtmlPartial/release"><div class="symbol monospace">open override fun <a href="load-range.html">loadRange</a>(startPosition: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, count: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>): <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="index.html">R</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace">open override fun <a href="../-tiled-data-source/load-range.html">loadRange</a>(params: <a href="https://developer.android.com/reference/kotlin/androidx/paging/PositionalDataSource.LoadRangeParams.html">PositionalDataSource.LoadRangeParams</a>, callback: <a href="https://developer.android.com/reference/kotlin/androidx/paging/PositionalDataSource.LoadRangeCallback.html">PositionalDataSource.LoadRangeCallback</a>&lt;<a href="index.html">R</a>&gt;)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="1101963874%2FFunctions%2F-1218846324" anchor-label="map" id="1101963874%2FFunctions%2F-1218846324" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":compass-paging:dokkaHtmlPartial/release" data-filterable-set=":compass-paging:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="../-tiled-data-source/index.html#2069593413%2FFunctions%2F-1218846324">map</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1101963874%2FFunctions%2F-1218846324"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":compass-paging:dokkaHtmlPartial/release" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":compass-paging:dokkaHtmlPartial/release"><div class="symbol monospace">override fun &lt;<a href="../-tiled-data-source/index.html#2069593413%2FFunctions%2F-1218846324">V</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="../-tiled-data-source/index.html#2069593413%2FFunctions%2F-1218846324">map</a>(function: <a href="https://developer.android.com/reference/kotlin/androidx/arch/core/util/Function.html">Function</a>&lt;<a href="index.html">R</a>, <a href="../-tiled-data-source/index.html#2069593413%2FFunctions%2F-1218846324">V</a>&gt;): <a href="https://developer.android.com/reference/kotlin/androidx/paging/PositionalDataSource.html">PositionalDataSource</a>&lt;<a href="../-tiled-data-source/index.html#2069593413%2FFunctions%2F-1218846324">V</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace">override fun &lt;<a href="../-tiled-data-source/index.html#-1458700567%2FFunctions%2F-1218846324">V</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="../-tiled-data-source/index.html#-1458700567%2FFunctions%2F-1218846324">map</a>(function: (<a href="index.html">R</a>) -&gt; <a href="../-tiled-data-source/index.html#-1458700567%2FFunctions%2F-1218846324">V</a>): <a href="https://developer.android.com/reference/kotlin/androidx/paging/PositionalDataSource.html">PositionalDataSource</a>&lt;<a href="../-tiled-data-source/index.html#-1458700567%2FFunctions%2F-1218846324">V</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="-261325942%2FFunctions%2F-1218846324" anchor-label="mapByPage" id="-261325942%2FFunctions%2F-1218846324" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":compass-paging:dokkaHtmlPartial/release" data-filterable-set=":compass-paging:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="../-tiled-data-source/index.html#-1358188455%2FFunctions%2F-1218846324">mapByPage</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-261325942%2FFunctions%2F-1218846324"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":compass-paging:dokkaHtmlPartial/release" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":compass-paging:dokkaHtmlPartial/release"><div class="symbol monospace">override fun &lt;<a href="../-tiled-data-source/index.html#-1358188455%2FFunctions%2F-1218846324">V</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="../-tiled-data-source/index.html#-1358188455%2FFunctions%2F-1218846324">mapByPage</a>(function: <a href="https://developer.android.com/reference/kotlin/androidx/arch/core/util/Function.html">Function</a>&lt;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="index.html">R</a>&gt;, <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="../-tiled-data-source/index.html#-1358188455%2FFunctions%2F-1218846324">V</a>&gt;&gt;): <a href="https://developer.android.com/reference/kotlin/androidx/paging/PositionalDataSource.html">PositionalDataSource</a>&lt;<a href="../-tiled-data-source/index.html#-1358188455%2FFunctions%2F-1218846324">V</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="symbol monospace">override fun &lt;<a href="../-tiled-data-source/index.html#-1694626563%2FFunctions%2F-1218846324">V</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a>&gt; <a href="../-tiled-data-source/index.html#-1694626563%2FFunctions%2F-1218846324">mapByPage</a>(function: (<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="index.html">R</a>&gt;) -&gt; <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a>&lt;<a href="../-tiled-data-source/index.html#-1694626563%2FFunctions%2F-1218846324">V</a>&gt;): <a href="https://developer.android.com/reference/kotlin/androidx/paging/PositionalDataSource.html">PositionalDataSource</a>&lt;<a href="../-tiled-data-source/index.html#-1694626563%2FFunctions%2F-1218846324">V</a>&gt;<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                    </div>
+                  </div>
+                </div>
+<a data-name="1838702493%2FFunctions%2F-1218846324" anchor-label="removeInvalidatedCallback" id="1838702493%2FFunctions%2F-1218846324" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":compass-paging:dokkaHtmlPartial/release" data-filterable-set=":compass-paging:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="../-tiled-data-source/index.html#1838702493%2FFunctions%2F-1218846324">removeInvalidatedCallback</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1838702493%2FFunctions%2F-1218846324"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title"><div class="divergent-group" data-filterable-current=":compass-paging:dokkaHtmlPartial/release" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"><div class="with-platform-tags"><span class="pull-right"></span></div>
+
+  <div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":compass-paging:dokkaHtmlPartial/release"><div class="symbol monospace">open fun <a href="../-tiled-data-source/index.html#1838702493%2FFunctions%2F-1218846324">removeInvalidatedCallback</a>(onInvalidatedCallback: <a href="https://developer.android.com/reference/kotlin/androidx/paging/DataSource.InvalidatedCallback.html">DataSource.InvalidatedCallback</a>)<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+  </div>
+</div>
+</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h2 class="">Properties</h2>
+              <div class="table" data-togglable="Properties"><a data-name="828330089%2FProperties%2F-1218846324" anchor-label="isInvalid" id="828330089%2FProperties%2F-1218846324" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"></a>
+                <div class="table-row" data-filterable-current=":compass-paging:dokkaHtmlPartial/release" data-filterable-set=":compass-paging:dokkaHtmlPartial/release">
+                  <div class="main-subrow keyValue ">
+                    <div class=""><span class="inline-flex"><a href="index.html#828330089%2FProperties%2F-1218846324">isInvalid</a><span class="anchor-wrapper"><span class="anchor-icon" pointing-to="828330089%2FProperties%2F-1218846324"></span>
+                          <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                        </span></span></div>
+                    <div>
+                      <div class="title">
+                        <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":compass-paging:dokkaHtmlPartial/release"><a data-name="828330089%2FProperties%2F-1218846324" anchor-label="isInvalid" id="828330089%2FProperties%2F-1218846324" data-filterable-set=":compass-paging:dokkaHtmlPartial/release"></a><div class="symbol monospace">open val <a href="index.html#828330089%2FProperties%2F-1218846324">isInvalid</a>: <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer"><span class="go-to-top-icon"><a href="#content"></a></span><span>© 2021 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span></div>
+      </div>
+    </div>
+  
+</body></html>
+
+

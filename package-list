@@ -1,0 +1,8 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+module:compass
+dev.arunkumar.compass
+dev.arunkumar.compass.thread
+module:compass-paging
+dev.arunkumar.compass.paging

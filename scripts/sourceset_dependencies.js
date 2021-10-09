@@ -1,0 +1,1 @@
+sourceset_dependencies = '{":compass:dokkaHtmlPartial/androidTestRelease":[],":compass:dokkaHtmlPartial/debug":[],":compass:dokkaHtmlPartial/main":[],":compass:dokkaHtmlPartial/release":[],":compass-paging:dokkaHtmlPartial/androidTestRelease":[],":compass-paging:dokkaHtmlPartial/debug":[],":compass-paging:dokkaHtmlPartial/main":[],":compass-paging:dokkaHtmlPartial/release":[]}'
