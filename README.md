@@ -83,7 +83,7 @@ withContext(RealmDispatcher()) {
         val persons = realm.where<Person>().findAll()
 
         val realmChangeListener = RealmChangeListener<RealmResults<Person>> {
-            println("Change liseneter called")
+            println("Change listener called")
         }
         persons.addChangeListener(realmChangeListener) // Safe to add
 
@@ -147,7 +147,7 @@ class MyViewModel: ViewModel() {
 }
 ```
 
-The `Flow` returned by `asPagingItems()` can be safely used for [transformations](https://developer.android.com/topic/libraries/architecture/paging/v3-transform#transform-data-stream), [seperators](https://developer.android.com/topic/libraries/architecture/paging/v3-transform#handle-separators-ui) and [caching](https://developer.android.com/topic/libraries/architecture/paging/v3-transform#avoid-duplicate). Although supported, for [converting to UI model](https://developer.android.com/topic/libraries/architecture/paging/v3-transform#convert-ui-model) prefer using `asPagingItems { /* convert */ }` as it is more efficient.
+The `Flow` returned by `asPagingItems()` can be safely used for [transformations](https://developer.android.com/topic/libraries/architecture/paging/v3-transform#transform-data-stream), [separators](https://developer.android.com/topic/libraries/architecture/paging/v3-transform#handle-separators-ui) and [caching](https://developer.android.com/topic/libraries/architecture/paging/v3-transform#avoid-duplicate). Although supported, for [converting to UI model](https://developer.android.com/topic/libraries/architecture/paging/v3-transform#convert-ui-model) prefer using `asPagingItems { /* convert */ }` as it is more efficient.
 
 ##### Compose
 
@@ -169,7 +169,7 @@ val items = tasks.collectAsLazyPagingItems()
 
 #### Why not Realm Freeze?
 
-[Frozen](https://docs.mongodb.com/realm/sdk/android/advanced-guides/threading/#frozen-objects) Realm objects is the official way to safely move objects around threads. However it still says connected to udnerlying `Realm` and poses risk around threading.
+[Frozen](https://docs.mongodb.com/realm/sdk/android/advanced-guides/threading/#frozen-objects) Realm objects is the official way to safely move objects around threads. However it still says connected to underlying `Realm` and poses risk around threading.
 
 > Frozen objects remain valid for as long as the realm that spawned them stays open. Avoid closing realms that contain frozen objects until all threads are done working with those frozen objects.
 
